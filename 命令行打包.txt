@@ -1,0 +1,24 @@
+1.生成R文件
+	aapt p -f -m -J build\gen -S src\main\res -I F:\dev\AndroidSDK\platforms\android-23\android.jar -M src\main\AndroidManifest.xml
+	
+2.编译java文件
+	javac -encoding utf-8 -target 1.7 -bootclasspath F:\dev\AndroidSDK\platforms\android-23\android.jar -d build\bin src\main\java\cn\coolyou\demo1\*.java src\main\java\cn\coolyou\plugin\*.java build\gen\cn\coolyou\demo1\R.java -classpath libs\*.jar
+	
+3.生成dex文件
+	dx --dex --output=gen\classes.dex bin libs
+	
+	//多dex
+	dx --dex --output=build\gen\classes.dex build\bin\classes libs
+	dx --dex --output=build\gen\classes2.dex build\bin\classes2
+	
+4.生成资源包
+	aapt package -f -S src\main\res -I F:\dev\AndroidSDK\platforms\android-23\android.jar -A src\main\assets -M src\main\AndroidManifest.xml -F build\gen\res.zip
+	
+	//把classes2.dex添加进res.zip
+	aapt add res.zip classes2.dex
+	
+5.打未签名包
+	java -classpath F:\dev\AndroidSDK\tools\lib\sdklib.jar com.android.sdklib.build.ApkBuilderMain build\gen\aaa.apk -u -z build\gen\res.zip -f build\gen\classes.dex -rj libs
+	
+6.签名
+	jarsigner -verbose -keystore debug.keystore -storepass android -keypass android -signedjar gen\aaasigned.apk gen\aaa.apk androiddebugkey
