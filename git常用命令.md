@@ -1,17 +1,17 @@
-    git init                    创建一个空仓库
+    git init                    创建一个空仓库
     git status                  查看版本库当前状态
     git log                     查看提交历史
                                     git log --pretty=oneline 单行显示
                                     git log --graph 显示分支合并图
-    git reflog                  查看所有操作记录，可以用来找回已删除的commit记录
+    git reflog                  查看所有操作记录，可以用来找回已删除的commit记录
     git add \<file\>            把文件添加到暂存区  
                                     git add a.txt  
                                     git add . 把所有文件添加到暂存区
     git commit -m “msg”         提交暂存区的内容到本地仓库
     git reset --hard commitid   回退到commitid，'HEAD'代表当前版本，
-                                ‘HEAD^’代表上个版本，‘HEAD^^'上上个版本，
-                                ’HEAD~100'上100个版本
-                                reset后想恢复可以用git reflog找回commit id
+                                ‘HEAD^’代表上个版本，‘HEAD^^'上上个版本，
+                                ’HEAD~100'上100个版本
+                                reset后想恢复可以用git reflog找回commit id
                                 git reset --hard HEAD^^ 回退到上两个版本
     git checkout -- <file>...   撤销文件在"工作区"的修改,就是让这个文件回到最近一次
                                 git commit或git add时的状态。
@@ -34,7 +34,7 @@
     git stash                   把当前工作现场“储藏”起来，等以后恢复现场后继续工作,
                                 切换分支时如果有未提交内容又不想提交时使用
     git stash list              查看stash的内容
-    git stash pop               回复stash内容并删除stash
+    git stash pop               回复stash内容并删除stash
 
     git push <remote repository> <local branch>:<remote branch> 格式
     git push origin local_branch:remote_branch  把本地分支推送到远程分支
