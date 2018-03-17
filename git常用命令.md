@@ -2,7 +2,7 @@
 
     git config --global alias.co checkout 给命令设置别名
     git init                    创建一个空仓库
-    git init --bare             创建一个不工作区的仓库（适合用于中心仓库初始化）
+    git init --bare             创建一个不带工作区的仓库（适合用于中心仓库初始化）
     git status                  查看版本库当前状态
     git log                     查看提交历史
                                     git log --pretty=oneline 单行显示
