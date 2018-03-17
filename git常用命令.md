@@ -1,4 +1,4 @@
- ![](git_overview.png)
+ ![](res/git_overview.png)
 
     git config --global alias.co checkout 给命令设置别名
     git init                    创建一个空仓库
@@ -71,14 +71,16 @@
     git push origin :refs/tags/tagname 删除远程标签
 ***
     git diff 
-![](gitdiff.jpg)
+![](res/gitdiff.jpg)
 ***
     git rebase
-![](gitrebase.jpg)
+![](res/gitrebase.jpg)
 ***
 > -- 命令中'--'的含义：  
 This option can be used to separate command-line options from the
 list of files, (useful when filenames might be mistaken for
 command-line options).
-	
+
+以上图片均来自<https://www.cnblogs.com/cheneasternsun/p/5952830.html>  
+
 [更多教程](https://www.cnblogs.com/cheneasternsun/p/5952830.html) 
