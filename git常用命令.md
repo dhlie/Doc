@@ -1,6 +1,7 @@
  ![](res/git_overview.png)
 
     git config --global alias.co checkout 给命令设置别名
+    git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ci) %C(bold blue)<%an>%Creset' --abbrev-commit"
     git init                    创建一个空仓库
     git init --bare             创建一个不带工作区的仓库（适合用于中心仓库初始化）
     git status                  查看版本库当前状态
