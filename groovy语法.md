@@ -840,3 +840,238 @@ Properties
 略
 
 ## 1.5. 闭包(Closures)
+闭包是开放，匿名的代码块，可以有参数，返回值，赋值给一个变量。闭包和方法的区别是闭包总是有返回值 
+
+### 1.5.1. 语法 
+
+闭包定义语法： `[closureParameters -> ] statements }`  
+`[closureParameters->]`是可选的逗号分隔的参数列表。有参数时`->`是必须的，不能省略。`statements`是0，1或多个groovy语句。
+
+    { item++ }        //无参闭包 
+
+    { -> item++ }     //无参闭包   
+
+    { println it }    //默认参数           
+
+    { it -> println it }      //声明参数   
+
+    { name -> println name }  //声明参数     
+
+    { String x, int y ->                                
+        println "hey ${x} the value is ${y}"  //多个参数
+    }
+
+    { reader ->                                         
+        def line = reader.readLine()        //多条语句
+        line.trim()
+    }
+一个闭包是类`groovy.lang.Closure`的一个实例.可以赋值给变量
+
+    def listener = { e -> println "Clicked on $e.source" }  
+    assert listener instanceof Closure
+
+    Closure callback = { println 'Done!' }                      
+    Closure<Boolean> isTextFile = {//可以使用泛型指定闭包的返回值
+        File it -> it.name.endsWith('.txt')                     
+    }
+
+闭包可以向方法一样调用,也可以调用闭包的`call()`方法:
+
+    def isOdd = { int i -> i%2 != 0 }                           
+    assert isOdd(3) == true                                     
+    assert isOdd.call(2) == false                          
+
+    def isEven = { it%2 == 0 }                                  
+    assert isEven(3) == false                                   
+    assert isEven.call(2) == true
+
+### 1.5.2. 参数
+#### 正常参数
+正常参数和方法参数一样 :可选的类型,名字,可选的默认值
+
+    def closureWithTwoArgsAndOptionalTypes = { a,int b -> a+b }
+    assert closureWithTwoArgsAndOptionalTypes(1,2) == 3
+
+    def closureWithTwoArgAndDefaultValue = { int a, int b=2 -> a+b }
+    assert closureWithTwoArgAndDefaultValue(1) == 3
+
+#### 默认参数
+当一个闭包没有声明参数,并且没有使用`->`,闭包会有一个默认参数`it`  
+没有声明参数,但是用了`->`,声明闭包是无参闭包,调用时不能传参.  
+
+    def magicNumber = { -> 42 }
+
+    // this call will fail because the closure doesn't accept any argument
+    magicNumber(11)
+
+#### 可变参数
+闭包可以声明可变参数 
+
+    def concat1 = { String... args -> args.join('') } 
+    assert concat1('abc','def') == 'abcdef'  
+    def concat2 = { String[] args -> args.join('') }    
+    assert concat2('abc', 'def') == 'abcdef'
+
+### 1.5.3. 代理策略
+#### this
+闭包中`this`指的是**离闭包最近**的**enclosing class**的对象  
+
+    class EnclosedInInnerClass {
+        class Inner {
+            Closure cl = { this }                               
+        }
+        void run() {
+            def inner = new Inner()
+            assert inner.cl() == inner                          
+        }
+    }
+    class NestedClosures {
+        void run() {
+            def nestedClosures = {
+                def cl = { this }                               
+                cl()
+            }
+            assert nestedClosures() == this                     
+        }
+    }
+
+#### owner
+闭包的`owner`指的是离闭包最近的enclosing对象,可能是闭包或class对象   
+
+    class EnclosedInInnerClass {
+        class Inner {
+            Closure cl = { owner }                               
+        }
+        void run() {
+            def inner = new Inner()
+            assert inner.cl() == inner                           
+        }
+    }
+    class NestedClosures {
+        void run() {
+            def nestedClosures = {
+                def cl = { owner }                               
+                cl()
+            }
+            assert nestedClosures() == nestedClosures            
+        }
+    }
+
+#### delegate
+不像`this owner`,`delegate`是用户定义的对象,默认设置成`owner` 
+
+    class Enclosing {
+        void run() {
+            def cl = { getDelegate() }  
+            def cl2 = { delegate }     
+            assert cl() == cl2()    
+            assert cl() == this    
+            def enclosed = {
+                { -> delegate }.call()    
+            }
+            assert enclosed() == enclosed    
+        }
+    }
+
+`delegate`可以动态设置成任何对象  
+ 
+    class Person {
+        String name
+    }
+    class Thing {
+        String name
+    }
+
+    def p = new Person(name: 'Norman')
+    def t = new Thing(name: 'Teapot')
+
+    def upperCasedName = { delegate.name.toUpperCase() }
+
+    upperCasedName.delegate = p
+    assert upperCasedName() == 'NORMAN'
+    upperCasedName.delegate = t
+    assert upperCasedName() == 'TEAPOT'
+
+#### 代理策略  
+
+- Closure.OWNER_FIRST is the default strategy. If a property/method exists on the owner, then it will be called on the owner. If not, then the delegate is used.
+
+- Closure.DELEGATE_FIRST reverses the logic: the delegate is used first, then the owner
+
+- Closure.OWNER_ONLY will only resolve the property/method lookup on the owner: the delegate will be ignored.
+
+- Closure.DELEGATE_ONLY will only resolve the property/method lookup on the delegate: the owner will be ignored.
+
+- Closure.TO_SELF can be used by developers who need advanced meta-programming techniques and wish to implement a custom resolution strategy: the resolution will not be made on the owner or the delegate but only on the closure class itself. It makes only sense to use this if you implement your own subclass of Closure.   
+
+        class Person {
+            String name
+            def pretty = { "My name is $name" }             
+            String toString() {
+                pretty()
+            }
+        }
+        class Thing {
+            String name                                     
+        }
+
+        def p = new Person(name: 'Sarah')
+        def t = new Thing(name: 'Teapot')
+
+        assert p.toString() == 'My name is Sarah' 
+        p.pretty.delegate = t      
+        assert p.toString() == 'My name is Sarah'//owner中有会优先用owner中的属性
+
+        //改变代理策略
+        p.pretty.resolveStrategy = Closure.DELEGATE_FIRST
+        assert p.toString() == 'My name is Teapot'
+
+#### Closures in GStrings  
+    def x = 1   //x是一个对象,并不是原始类型
+    def gs = "x = ${x}"  //GString创建时引用了对象x,值为1
+    assert gs == 'x = 1'
+
+    x = 2
+    assert gs == 'x = 1'  //x变成了新对象,GString仍然引用的旧值
+
+    //因为Groovy中一切都是对象
+    class Person {
+        String name
+        String toString() { name }          
+    }
+    def sam = new Person(name:'Sam')        
+    def lucy = new Person(name:'Lucy')      
+    def p = sam                             
+    def gs = "Name: ${p}"                   
+    assert gs == 'Name: Sam'                
+    p = lucy                                
+    assert gs == 'Name: Sam'                
+    sam.name = 'Lucy'                       
+    assert gs == 'Name: Lucy'
+
+    //使用闭包,懒加载求值
+    class Person {
+        String name
+        String toString() { name }
+    }
+    def sam = new Person(name:'Sam')
+    def lucy = new Person(name:'Lucy')
+    def p = sam
+    // Create a GString with lazy evaluation of "p"
+    def gs = "Name: ${-> p}"
+    assert gs == 'Name: Sam'
+    p = lucy
+    assert gs == 'Name: Lucy'
+
+## 1.6. Semantics
+### 1.6.1. Statements
+#### 变量定义
+定义变量时可以使用具体类型,或者使用`def`不指定具体类型  
+多个变量可以同时赋值  
+
+    def (a, b, c) = [10, 20, 'foo']
+    assert a == 10 && b == 20 && c == 'foo'
+
+    //可以指明类型
+    def (int i, String j) = [10, 'foo']
+    assert i == 10 && j == 'foo'
