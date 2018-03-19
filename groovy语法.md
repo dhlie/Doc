@@ -1075,3 +1075,5 @@ Properties
     //可以指明类型
     def (int i, String j) = [10, 'foo']
     assert i == 10 && j == 'foo'
+
+if/else, for/while循环,switch-case和java兼容,略
