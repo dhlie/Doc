@@ -459,7 +459,7 @@ Spread map elements
     assert map == [a:1, b:2, c:3, d:4]    
 
 #### 范围操作符
-Ranges的实现是轻量级的，至存储了上下界，只要是`Comparable `并且有`next()` `previous()`方法，都可以创建rang
+Ranges的实现是轻量级的，只存储了上下界，只要是`Comparable `并且有`next()` `previous()`方法，都可以创建rang
 
     def range = 0..5                 
     assert (0..5).collect() == [0, 1, 2, 3, 4, 5]       
@@ -713,7 +713,7 @@ Groovy中class和Java中的class类似，主要有以下几个不同点：
         }
     }
 
-    //使用构造方法的三中形式
+    //使用构造方法的三种形式
     def person1 = new PersonConstructor('Marie', 1)  
     def person2 = ['Marie', 2] as PersonConstructor  
     PersonConstructor person3 = ['Marie', 3]
@@ -840,11 +840,11 @@ Properties
 略
 
 ## 1.5. 闭包(Closures)
-闭包是开放，匿名的代码块，可以有参数，返回值，赋值给一个变量。闭包和方法的区别是闭包总是有返回值 
+闭包是开放，匿名的代码块，可以有参数，返回值，赋值给一个变量。
 
 ### 1.5.1. 语法 
 
-闭包定义语法： `[closureParameters -> ] statements }`  
+闭包定义语法： `{ [closureParameters -> ] statements }`  
 `[closureParameters->]`是可选的逗号分隔的参数列表。有参数时`->`是必须的，不能省略。`statements`是0，1或多个groovy语句。
 
     { item++ }        //无参闭包 
