@@ -112,15 +112,18 @@ Markdown 支持有序列表和无序列表。
 
 ## 代码区块
 
-要在 Markdown 中建立代码区块很简单，只要简单地缩进 4 个空格或是 1 个制表符就可以，例如，下面的输入：
-
+要在 Markdown 中建立代码区块很简单，只要简单地缩进 4 个空格或是 1 个制表符就可以，前提是代码区块前要有一个空行，例如，下面的输入：
     这是一个普通段落：
 
-        这是一个代码区块。
+    public static void main()
 
-如果要标记一小段行内代码，你可以用反引号把它包起来（`），例如：
+也可以用三个（`）把代码区块包括起来：
+```
+    public static void main()
+```
+如果要标记一小段行内代码，你可以用反引号把它包起来（`），例如：  
 
-    Use the `printf()` function.
+Use the `printf()` function.
 
 ## 分隔线
 
@@ -150,15 +153,15 @@ Markdown 支持有序列表和无序列表。
 
 ## 强调
 
-Markdown 使用星号（*）和底线（_）作为标记强调字词的符号，被 * 或 _ 包围的字词会被转成用 `<em>` 标签包围，用两个 * 或 _ 包起来的话，则会被转成 `<strong>`，例如：
+Markdown 使用一对’*’或’_’包围的内会显示为斜体。使用双星号或者双下划线包围的会显示为加粗。注意*或_前后都有空格时会被识别为普通符号原样输出，例如：
 
-    *single asterisks*
+*single asterisks*
 
-    _single underscores_
+_single underscores_
 
-    **double asterisks**
+**double asterisks**
 
-    __double underscores__
+__double underscores__
 
 
 ## 图片
