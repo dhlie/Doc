@@ -119,39 +119,66 @@ python是面向对象的语言,一切皆对象
         对于所有标识空性的对象都会转换成False,其余的转换为True
         哪些表示的空性:0,None,''等
 
+    逻辑值检测
+        任何对象都可以进行逻辑值的检测，以便在 if 或 while 作为条件或是作为下文所述布尔运算的操作数来使用。
+
+        一个对象在默认情况下均被视为真值，除非当该对象被调用时其所属类定义了 __bool__() 方法且返回 False 
+            或是定义了 __len__() 方法且返回零。
+
+        1 下面基本完整地列出了会被视为假值的内置对象:
+        被定义为假值的常量: None 和 False。
+        任何数值类型的零: 0, 0.0, 0j, Decimal(0), Fraction(0, 1)
+        空的序列和多项集: '', (), [], {}, set(), range(0)
+
+        产生布尔值结果的运算和内置函数总是返回 0 或 False 作为假值，1 或 True 作为真值，除非另行说明。 
+        （重要例外：布尔运算 or 和 and 总是返回其中一个操作数。）
+
+
 ### 运算符
 
 * 算数运算符
-    `+` 数值相加,字符串拼接
-    `-` 数值相减
-    `*` 数值相乘, 字符串和数字相乘是重复字符串指定次数 `print('-'*20) # 打印分割线`
-    `/` 数值相除,结果是浮点数
-    `//` 整除,结果只保留整数部分, **对浮点数整除结果仍是浮点数** `a = 25.0 // 4 # 6.0`
-    `**` 幂运算,求一个值的几次幂(0.5次幂是开平方)
-    `%` 取模
+
+        `+` 数值相加,字符串拼接
+        `-` 数值相减
+        `*` 数值相乘, 字符串和数字相乘是重复字符串指定次数 `print('-'*20) # 打印分割线`
+        `/` 数值相除,结果是浮点数
+        `//` 整除,结果只保留整数部分, **对浮点数整除结果仍是浮点数** `a = 25.0 // 4 # 6.0`
+        `**` 幂运算,求一个值的几次幂(0.5次幂是开平方)
+        `%` 取模
 
 * 赋值运算符
     `=` `+=` `-=` `*=` `/=` `%=` `//=` `**=`
 
+        := 可在表达式内部为变量赋值。 它被昵称为“海象运算符”因为它很像是 海象的眼睛和长牙。
+
+        if (n := len(a)) > 10:
+            pass
+        
+        # Loop over fixed length blocks
+        while (block := f.read(256)) != '':
+            process(block)
+
 * 关系运算符
-    `>` `<` `>=` `<=` `==` `!=`
-    `is` `is not`比较两个对象id
-    `==` `!=` 比较的是对象的值,不是id
-    对字符串进行比较时,比较的是字符串的Unicode码的大小,逐位进行比较
+
+        `>` `<` `>=` `<=` `==` `!=`
+        `is` `is not`比较两个对象id
+        `==` `!=` 比较的是对象的值,不是id
+        对字符串进行比较时,比较的是字符串的Unicode码的大小,逐位进行比较
 
 * 逻辑运算符
-    `and` `or` `not` (会短路)
-    对非布尔值进行`not`运算时会先转换成布尔值
-    对非布尔值进行`and` `or`运算时,Python会将其当做布尔值运算,**最终会返回最后求值的原值(包括类型)**
 
-        a = 1 and 2 # 2
-        a = 2 and 1 # 1
-        a = 1 and 0 # 0
-        a = 0 and 1 # 0
-        a = 1 or 2 # 1
-        a = 2 or 1 # 2
-        a = 1 and 'a' # 'a' 字符串类型
-        a = 0 and 'dd' # 0
+        `and` `or` `not` (会短路)
+        对非布尔值进行`not`运算时会先转换成布尔值
+        对非布尔值进行`and` `or`运算时,Python会将其当做布尔值运算,**最终会返回最后求值的原值(包括类型)**
+
+            a = 1 and 2 # 2
+            a = 2 and 1 # 1
+            a = 1 and 0 # 0
+            a = 0 and 1 # 0
+            a = 1 or 2 # 1
+            a = 2 or 1 # 2
+            a = 1 and 'a' # 'a' 字符串类型
+            a = 0 and 'dd' # 0
 
 * 条件运算符
     语法:语句1 if 条件表达式 else 语句2
@@ -481,3 +508,361 @@ python是面向对象的语言,一切皆对象
     请注意，非运算符版本的 update(), intersection_update(), 
         difference_update() 和 symmetric_difference_update()
         方法将接受任意可迭代对象作为参数。
+
+## 函数
+    def 函数名([形参1 = a, 形参2 = b, ...]) :
+        代码块
+    调用时实参可以是任意类型
+
+    可以在形参前边加一个*,这样这个形参将会获取到所有实参,它将所有实参保存到一个元祖中
+
+    带*的参数可以写在任意位置,调用的时候*参数后所有的参数都要用关键字参数
+
+    '/,'前面的形参为仅限位置形参(可以避免形参名修改后影响调用代码), '*,'后面的形参必须以关键字形式传递
+
+    形参 a 和 b 为仅限位置形参，c 或 d 可以是位置形参或关键字形参，而 e 或 f 要求为关键字形参:
+    def f(a, b, /, c, d, *, e, f):
+        print(a, b, c, d, e, f)
+
+    **形参 带两个*的形参,用来接收关键字参数
+
+    返回值用return,可以返回任意类型
+
+    文档字符串(doc str) 定义函数时可以在函数内部编写文档字符串,可以使用help()查看
+
+    作用域:全局作用域,函数作用域
+        所有函数以外的区域都是全局作用域
+        在全局作用域定义的变量都是全局变量,全局变量可以在程序的任意位置被访问
+
+        在函数作用域中定义的变量都是局部变量,只能在函数内部访问
+
+        在函数作用域使用全局变量时用global
+            global a # 使用全局变量a,如果未定义则定义全局变量
+
+    命名空间:命名空间实际上就是一个字典,专门用来存储变量
+        locals()用来获取当前作用域的命名空间
+        globals()获取全局命名空间
+        拿到命名空间字典后可以修改,访问里面的值
+
+    高阶函数:接收函数作为参数,或者将函数作为返回值的函数是高阶函数
+
+    匿名函数:lambda函数表达式,专门用来创建一些简单地函数,
+        他是函数创建的又一种方式
+        语法: lambda 参数列表 : 返回值
+
+    闭包:将函数作为返回值返回,也是一种高阶函数,这种高阶函数叫做闭包
+        通过闭包可以创建一些只有当前函数能访问的变量
+        可以将一些私有的数据藏到闭包中
+
+    装饰器:
+        def say_hello() :
+            print('hello')
+
+        def sum(a, b) :
+            return a + b
+
+        def begin_end(func) :
+
+            def deco(*args, **kwargs) :
+                print('deco start------')
+                result = func(*args, **kwargs)
+                print('deco end--------')
+                return result
+            
+            return deco
+        deco_say_hello = begin_end(say_hello)
+        deco_say_hello()
+        deco_sum = begin_end(sum)
+        print(deco_sum(3,5))
+
+-----
+
+    # 形参可以设置默认值
+    def fn(a = 1, b = 2, c = 3) :
+        print(f'a = {a}, b = {b}, c = {c}')
+
+    fn(1,2,3)               # 位置参数
+    fn(c = 3, a = 2, b = 1) # 关键字参数
+    fn(1, c = 3)            # 位置参数和关键字参数混用
+
+    def sum(a, *b) :
+        print('a = ', a, 'b = ', b)
+    sum(1, 2, 3)            # a =  1 b =  (2, 3)
+    sum(1)                  # a =  1 b =  ()
+
+    # *参数不是必须放在最后,它后面的所有参数都必须以关键字参数形式传递
+    def sum(*a, b) :
+        print('a = ', a, 'b = ', b)
+    sum(1,2,3,b=4)          # a =  (1, 2, 3) b =  4
+
+    # 这里必须以关键字形式传参
+    def sum(*,a, b) :
+        print('a + b = ', a + b)
+    sum(a = 1, b = 2)       # 这里必须以关键系形式传参
+
+    # **形参可以接收关键字参数,它会将这些参数保存在一个字典中
+    def sum(**a) :
+        print('a = ', a)
+    sum(a = 1, b = 2, c = 3) # a =  {'a': 1, 'b': 2, 'c': 3}
+
+    # 参数解包
+    # 传递序列参数时可以加一个*,这样会自动将序列中的元素依次作为参数传递
+    # 对字典解包用**
+    t = (10, 20, 30)
+    d = {'a':10, 'b':20, 'c':30}
+    def sum(a, b, c) :
+        print(f'a = {a}, b = {b}, c = {c}')
+    sum(*t)         # a = 10, b = 20, c = 30
+    sum(**d)        # a = 10, b = 20, c = 30
+
+    #形参类型
+    def sum(a:int, b:float, c:bool) :   # 可以给形参加类型,传参时类型可以不匹配
+        print('a = ', a, 'b = ', b, 'c = ', c)
+    sum(1,2,3) # 类型不匹配  a =  1 b =  2 c =  3
+
+--------------------------
+
+## 对象(Object)
+    用class关键字定义类
+    class 类名([父类]) :
+        公共属性
+        方法
+    object 是所有类的父类
+    isinstance() 检查一个对象是不是类的实例
+    __method__() 这种方法叫魔术方法/特殊方法,不要尝试去调用魔术方法
+        会在特殊时期自动调用
+
+    __属性,该属性是隐藏属性,外部无法访问,其实就是改了个名字(_类名__属性)
+        依然可以通过修改后的名字访问
+    一般用单_开头标识私有属性,只是一种规范,外部依然可以访问修改
+
+    p = Person()的运行流程
+        1.创建一个变量
+        2.在内存中创建一个新对象
+        3.调用__init__(self)方法
+        4.将对象id赋值给变量
+
+    property装饰器
+    class Dog() :
+        def __init__(self, name, age, gender, height) :
+        self._name = name
+
+        # getter 方法
+        @property
+        def name(self) :
+            return self._name
+
+        # setter方法
+        @name.setter
+        def name(self, name) :
+            self._name = name
+
+        d1 = Dog('xiaoqiang', 2, '公', 100)
+        d1.name = 'lisi'
+        print(d1.name) # lisi
+
+    方法重写:子类中有和父类同名方法时子类会覆盖父类的方法
+        当调用一个对象的方法时会优先从当前对象中找,
+        如果找不到回去当前对象的父类中找,
+        如果还找不到,则去父类的父类中找,以此类推
+        super() 获取父类对象
+        同名方法都会覆盖,python中没有方法重载,方法和属性也不能重名,同名也会覆盖
+
+    继承:python支持多重继承
+        多重继承时,子类同时拥有所有父类中的方法
+        方法调用时会按继承顺序查找,找到了就调用
+        开发中不建议使用多继承
+
+    类名.__bases__ 这个属性可以用来获取当前类的所有父类
+        print(Dog.__bases__) # (<class '__main__.Animal'>,)
+
+    多态:
+
+    类属性/实例属性:
+        直接在类中定义的属性叫类属性,类属性只能通过类对象修改
+            无法通过实例对象修改
+            class Dog :
+                name = ''   # 类属性
+            Dog.name = 'ddd'
+            d.name = 'aaa'  # 无法通过对象修改类属性 会在对象中新增实例属性
+            print(Dog.name) # ddd
+            print(d.name)   # aaa
+
+    实例方法:在类中定义,以self为第一个参数的方法都是实例方法
+        实例方法通过实例和类调用
+            通过实例调用时会自动将当前调用对象作为self传入
+            通过类调用时,需要手动传入self参数
+
+            d = Dog()
+            d.run()
+            Dog.run(d)
+
+    类方法:在类内部使用@classmethod 来修饰的方法属于类方法
+        类方法第一个参数是cls,也会被自动传递,cls就是当前类对象
+        和实例方法的区别:第一个参数不同;类方法可以通过类调用,也可以通过实例调用
+        
+        @classmethod
+        def cm(cls) :
+            print('classmethod cls:', cls, cls.age)
+
+    静态方法:在类中使用@staticmethod 修饰的方法属于静态方法
+        静态方法不需要默认参数,通过类和实例调用
+        本质上是一个和当前类无关的方法,只是保存在这个类中
+
+        @staticmethod
+        def sm() :
+            print('staticmethod')
+
+------------
+
+## 模块(module)
+    python中一个.py文件就是一个模块,模块名就是文件名
+    在一个模块中引入外部模块,格式为:
+        import 模块名 [as 别名]
+        from 包[.子包] import 模块名
+        可以写在程序任意位置,但一般情况下都写在文件开头
+
+    每个模块内部都有一个 __name__ 属性,通过这个属性可以获取到模块的名字
+    主模块的名字为 __main__,程序只有一个主模块
+        if __name__=='__main__':  # 推荐使用这种方式调试代码，
+            # 只有执行当前模块的人才会执行以下代码，
+            # 如果是别人调用该模块，以下的代码是不会被执行的！
+            foo()
+
+        import test_module as test
+
+        print(__name__)         # __main__
+        print(test.__name__)    # test_module
+
+    包:包也是一个模块,普通模块就是一个py文件,包是一个带有__init__.py文件的文件夹
+        包中必须要有一个 __init__.py文件,否则就是一个普通目录
+        import语句会执行__init__.py文件
+
+        packA
+        |-- __init__.py
+        |-- math.py
+        |-- packB
+            |-- __init__.py
+            |-- log.py
+
+        # 多级包的引入
+        from packA.packB import log
+
+    __pycache__ 是python的缓存目录.
+        py文件在执行前,需要被解析器先转换为机器码,然后再执行
+        为了提高性能,python会在编译过一次以后,将机器码保存到缓存文件中
+
+    为了实现开箱即用的思想,python提供了一系列标准库
+
+    sys模块,它里面提供了一些变量和函数,我们可以获取到python解析器的信息
+        或者通过函数操作解析器
+
+        sys.argv 获取代码执行时,命令行中所包含的参数
+        sys.modules 获取当前程序中所有模块
+        sys.path 他是一个模块搜索路径列表,类似java 中的classpath
+            使用import语句时候，Python解释器通过sys.path的路径搜索。
+        sys.platform 运行平台
+        
+            |系统           |平台值|
+            |:-             |:-|
+            |AIX            |'aix'|
+            |Linux          |'linux'|
+            |Windows        |'win32'|
+            |Windows/Cygwin |'cygwin'|
+            |macOS          |'darwin'|
+
+        sys.exit() 退出程序函数
+
+    pprint模块,有一个pprint()方法,用来对打印的数据做简单的格式化
+
+    os 模块对操作系统进行访问
+        os.environ 系统环境变量
+        os.system() 用来执行平台命令
+        os.listdir()
+        os.getcwd() 获取当前工作目录
+        os.chdir() cd命令
+        os.mkdir()
+        os.rmdir()
+        os.remove() 删除文件
+        os.rename() 重命名文件
+
+## 异常
+    异常处理语法
+        try:
+            代码块(可能出错的代码)
+        [except 异常类型1 as 别名 :
+            代码块
+        except 异常类型2 :
+            代码块
+        except: # 不跟错误类型或 跟Exception类型 时会捕获所有异常
+            代码块(出错后要执行的代码)]
+        [else:
+            代码块(未出错时执行的代码)]
+        [finally:
+            代码块]
+
+    抛异常用 raise 异常类型
+        # 自定义异常 Exception是所有异常的父类
+        class SelfError(Exception) :
+            pass
+
+        # 抛异常
+        def ex() :
+            raise SelfError('ex error')
+
+    
+## 文件操作
+    file = open(file, mode='r', buffering=-1, encoding=None, errors=None, newline=None, closefd=True, opener=None)
+        |模式   |意义|
+        |:-     |:-|
+        |'r'    |只读(默认)|
+        |'w'    |只写,不能读,文件不存在会创建,打开时会清空文件|
+        |'x'    |排他性创建并写入,如果文件已存在则失败|
+        |'a'    |追加写入,文件不存在会创建文件|
+        |'b'    |二进制模式|
+        |'t'    |文本模式(默认)|
+        |'+'    |打开用于更新(读取与写入)|
+
+    file.close() 关闭文件
+    file.read(size=-1, /) 读取size个字符(文本模式)或字节(二进制模式),如果size是负数或者省略,一直读到文件结束
+    file.readline() 读取一行,返回字符串
+    file.readlines() 读取所有行,返回一个list,里面每个元素是一行的字符串
+    file.tell() 返回当期位置
+    file.seek(cookie, whence=0, /) 改变流的位置,whence:
+        0 从流开始出偏移
+        1 从当前位置偏移,偏移量可以是负数
+        2 从流结尾处偏移,偏移量通常是负数
+
+    with 语句 as 语句
+        代码块
+
+    # with 语句结束会自动关闭文件
+    with open('hello.txt') as file_obj :
+        r = file_obj.read()
+        print(r)
+
+    try :
+        with open('hello.txt') as file :
+            buf = 1024
+            while True :
+                content = file.read(buf)
+                if not content :
+                    break
+                print(content, end = '')
+    except :
+        print('error')
+
+    # 拷贝文件
+    try:
+        oldp = '/Users/duanhl/Downloads/bb.pdf'
+        newp = 'aa.pdf'
+        with open(oldp, 'rb') as file :
+            with open(newp, 'wb') as new_file :
+                buf = 1024 * 4
+                while True :
+                    c = file.read(buf)
+                    if not c :
+                        break
+                    new_file.write(c)
+    except Exception as e :
+        raise e
