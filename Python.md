@@ -55,6 +55,16 @@ python中所有小数都是float类型
     a = f'b = {b}, c = {c}'
     print(f'a = "{a}"')
 ```
+如果你不希望前置了 \ 的字符转义成特殊字符，
+    可以使用 **原始字符串** 方式，在引号前添加 r 即可:
+
+    print('C:\tome\demo')  # here \t means table! # C:      ome\demo
+    print(r'C:\tome\demo')  # note the r before the quote
+相邻两个字符串会自动连接到一起 
+
+    print('Py' 'thon' == 'Python') # True
+    text = ('Put several strings within parentheses '
+         'to have them joined together.')
 
 字符串复制
 将字符串和数字相乘`*`,字符串会重复指定次数 `a = 'abc' * 3 # a = "abcabcabc"`
@@ -261,6 +271,7 @@ python是面向对象的语言,一切皆对象
     从列表中获取一个子列表, 语法:[起始:结束:步长]包含头不包含尾,步长可以省略,默认值为1
     返回一个新列表,不影响原来的列表
     步长不能为0 可以是负数,如果是负数,会从列表后向前取元素
+    注意切片的开始总是被包括在结果中，而结束不被包括。这使得 s[:i] + s[i:] 总是等于 s
 
     my_list = [1,2,3,4,5,6,7,8,9]
     sub_list = my_list[1:3] # [2, 3] 包含头不包含尾
@@ -427,6 +438,15 @@ python是面向对象的语言,一切皆对象
     update([other])
         使用来自 other 的键/值对更新字典，覆盖原有的键。 返回 None。
 
+    d = {'a':1, 'b':2, 'c':3}
+    for k,v in d.items() :
+        print(f'key = {k}, value = {v}')
+    
+    当在序列中循环时，用 enumerate() 函数可以将索引位置和其对应的值同时取出
+    li = [1,2,3,4,5,]
+    for i,v in enumerate(li):
+        print(f'position = {i}, value = {v}')
+
 ## 集合(set)
     集合中只能存储不可变对象
     存储的对象是无序的
@@ -523,6 +543,13 @@ python是面向对象的语言,一切皆对象
     形参 a 和 b 为仅限位置形参，c 或 d 可以是位置形参或关键字形参，而 e 或 f 要求为关键字形参:
     def f(a, b, /, c, d, *, e, f):
         print(a, b, c, d, e, f)
+
+        def f(pos1, pos2, /, pos_or_kwd, *, kwd1, kwd2):
+              -----------    ----------     ----------
+                |             |                  |
+                |        Positional or keyword   |
+                |                                - Keyword only
+                -- Positional only
 
     **形参 带两个*的形参,用来接收关键字参数
 
@@ -748,6 +775,13 @@ python是面向对象的语言,一切皆对象
         # 多级包的引入
         from packA.packB import log
 
+    从包中导入 *
+        如果一个包的 __init__.py 代码定义了一个名为 __all__ 的列表，它会被视为在遇到 from package import * 时应该导入的模块名列表
+
+            __all__ = ["echo", "surround", "reverse"]
+        如果未定义,from sound.effects import * 语句不会导入包中的模块
+        
+
     __pycache__ 是python的缓存目录.
         py文件在执行前,需要被解析器先转换为机器码,然后再执行
         为了提高性能,python会在编译过一次以后,将机器码保存到缓存文件中
@@ -866,3 +900,45 @@ python是面向对象的语言,一切皆对象
                     new_file.write(c)
     except Exception as e :
         raise e
+
+## 迭代器
+
+    for element in [1, 2, 3]:
+        print(element)
+    for element in (1, 2, 3):
+        print(element)
+    for key in {'one':1, 'two':2}:
+        print(key)
+    for char in "123":
+        print(char)
+    for line in open("myfile.txt"):
+        print(line, end='')
+
+    在幕后，for 语句会调用容器对象中的 iter()。 该函数返回一个定义了 __next__() 方法的
+        迭代器对象，该方法将逐一访问容器中的元素。 当元素用尽时，__next__() 将
+        引发 StopIteration 异常来通知终止 for 循环
+
+    给你的类添加迭代器行为很容易。 定义一个 __iter__() 方法来返回
+        一个带有 __next__() 方法的对象。 如果类已定义了 __next__()，
+        则 __iter__() 可以简单地返回 self:
+
+        class Msg :
+
+            def __init__(self, data) :
+                self._data = data
+                self._len = len(data)
+                self._index = 0
+
+            def __iter__(self) :
+                return self
+
+            def __next__(self) :
+                if self._index == self._len :
+                    raise StopIteration
+                result = self._data[self._index]
+                self._index += 1
+                return result
+
+        m = Msg('hello')
+        for i in m :
+            print(i)
