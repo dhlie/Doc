@@ -21,11 +21,20 @@
 
 #### 数值 python中数值分三种:整数,浮点数,复数
 整数都是int类型,大小没有限制,不会溢出,如果数值太大可以加`_`分隔
+整型数字面值的长度没有限制，能一直大到占满可用内存。
 
     a = 999999_99999_9999999_999999_9999
     b = 0b1010 # 二进制
     c = 0o123 # 八进制
     d = 0x7f # 十六进制
+    
+    整数类型的按位运算
+    x | y       x 和 y 按位 或
+    x ^ y       x 和 y 按位 异或
+    x & y       x 和 y 按位 与
+    x << n      x 左移 n 位
+    x >> n      x 右移 n 位
+    ~x          x 逐位取反
 
 python中所有小数都是float类型
 对浮点数进行运算时,可能会得到一个不精确的结果
@@ -155,6 +164,8 @@ python是面向对象的语言,一切皆对象
 
 * 赋值运算符
     `=` `+=` `-=` `*=` `/=` `%=` `//=` `**=`
+    
+        size = width, height = 640, 480 #连续赋值， size是元祖， width， height是变量
 
         := 可在表达式内部为变量赋值。 它被昵称为“海象运算符”因为它很像是 海象的眼睛和长牙。
 
@@ -444,6 +455,11 @@ python是面向对象的语言,一切皆对象
     li = [1,2,3,4,5,]
     for i,v in enumerate(li):
         print(f'position = {i}, value = {v}')
+        
+    # Strategy:  Iterate over a copy 不要一边遍历一边修改，通常做法是创建副本
+    for user, status in users.copy().items():
+        if status == 'inactive':
+            del users[user]
 
 ## 集合(set)
     集合中只能存储不可变对象
@@ -563,11 +579,47 @@ python是面向对象的语言,一切皆对象
 
         在函数作用域使用全局变量时用global
             global a # 使用全局变量a,如果未定义则定义全局变量
+        nonlocal 语句表明特定变量生存于外层作用域中并且应当在其中被重新绑定。
+        def scope_test():
+            def do_local():
+                spam = "local spam"
+        
+            def do_nonlocal():
+                nonlocal spam
+                spam = "nonlocal spam"
+        
+            def do_global():
+                global spam
+                spam = "global spam"
+        
+            spam = "test spam"
+            do_local()
+            print("After local assignment:", spam)
+            do_nonlocal()
+            print("After nonlocal assignment:", spam)
+            do_global()
+            print("After global assignment:", spam)
+        
+        scope_test()
+        print("In global scope:", spam)
+        
+        #代码输出：
+        After local assignment: test spam
+        After nonlocal assignment: nonlocal spam
+        After global assignment: nonlocal spam
+        In global scope: global spam
 
     命名空间:命名空间实际上就是一个字典,专门用来存储变量
         locals()用来获取当前作用域的命名空间
         globals()获取全局命名空间
         拿到命名空间字典后可以修改,访问里面的值
+        
+    函数的 执行 会引入一个用于函数局部变量的新符号表。 更确切地说，
+        函数中所有的变量赋值都将存储在局部符号表中；而变量引用会
+        首先在局部符号表中查找，然后是外层函数的局部符号表，
+        再然后是全局符号表，最后是内置名称的符号表。 
+        因此，全局变量和外层函数的变量不能在函数内部直接
+        赋值（除非是在 global 语句中定义的全局变量)
 
     高阶函数:接收函数作为参数,或者将函数作为返回值的函数是高阶函数
 
@@ -737,11 +789,55 @@ python是面向对象的语言,一切皆对象
         @staticmethod
         def sm() :
             print('staticmethod')
+            
+    # 特殊方法
+    object.__new__(cls[, ...])
+        调用以创建一个 cls 类的新实例。
+        典型的实现会附带适宜的参数使用 super().__new__(cls[, ...])，
+            通过超类的 __new__() 方法来创建一个类的新实例，
+            然后根据需要修改新创建的实例再将其返回。
+        如果返回了一个新实例，__init__()方法会被调用，否则不会被调用
+    object.__init__(self[, ...])
+        在实例 (通过 __new__()) 被创建之后，返回调用者之前调用。
+    object.__del__(self)
+        在实例将被销毁时调用。
+        del x 并不直接调用 x.__del__() --- 前者会将 x 的
+            引用计数减一，而后者仅会在 x 的引用计数变为零时被调用。
+    object.__repr__(self)
+        由 repr() 内置函数调用以输出一个对象的“官方”字符串表示。
+            如果可能，这应类似一个有效的 Python 表达式，能被用来
+            重建具有相同取值的对象（只要有适当的环境）。
+            如果这不可能，则应返回形式如 <...some useful description...> 的字符串
+    object.__str__(self)
+        通过 str(object) 以及内置函数 format() 和 print() 
+            调用以生成一个对象的“非正式”或格式良好的字符串表示。
+            返回值必须为一个 字符串 对象。
+    object.__bytes__(self)
+        通过 bytes 调用以生成一个对象的字节串表示。这应该返回一个 bytes 对象。
+    object.__format__(self, format_spec)
+        通过 format() 内置函数、扩展、格式化字符串字面值 的求
+            值以及 str.format() 方法调用以生成一个对象的“格式化”字符串表示。 
+    object.__lt__(self, other)
+    object.__le__(self, other)
+    object.__eq__(self, other)
+    object.__ne__(self, other)
+    object.__gt__(self, other)
+    object.__ge__(self, other)
+        < <= == != > >=运算符
+    object.__bool__(self)
+        调用此方法以实现真值检测以及内置的 bool() 操作；应该返回 False 或 True
+        如果未定义此方法，则会查找并调用 __len__() 并在其返回非零值时视对象的逻辑值为真。
+        如果一个类既未定义 __len__() 也未定义 __bool__() 则视其所有实例的逻辑值为真。
+     
 
 ------------
 
 ## 模块(module)
     python中一个.py文件就是一个模块,模块名就是文件名
+    模块可以包含可执行的语句以及函数定义。这些语句用于初始化模块。
+        它们仅在模块 第一次 在 import 语句中被导入时才执行。
+    每个模块都有它自己的私有符号表，该表用作模块中定义的所有函数的全局符号表。
+        因此，模块的作者可以在模块内使用全局变量，而不必担心与用户的全局变量发生意外冲突
     在一个模块中引入外部模块,格式为:
         import 模块名 [as 别名]
         from 包[.子包] import 模块名
@@ -867,6 +963,13 @@ python是面向对象的语言,一切皆对象
 
     with 语句 as 语句
         代码块
+    执行过程：
+        1.对上下文表达式 (在 with_item 中给出的表达式) 求值以获得一个上下文管理器。
+        2.载入上下文管理器的 __exit__() 以便后续使用。
+        3.发起调用上下文管理器的 __enter__() 方法。
+        4.如果 with 语句中包含一个目标，来自 __enter__() 的返回值将被赋值给它。
+        5.执行语句体。
+        6.发起调用上下文管理器的 __exit__() 方法。 
 
     # with 语句结束会自动关闭文件
     with open('hello.txt') as file_obj :
