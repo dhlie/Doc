@@ -323,5 +323,209 @@ fun foo() {
 
 
 
+#### 类与继承
 
+##### 类
+
+类声明由类名、类头（指定其类型参数、主构造函数等）以及由花括号包围的类体构成。类头与类体都是可选的； 如果一个类没有类体，可以省略花括号。
+
+```
+class Empty
+```
+
+###### 构造函数
+
+一个类可以有一个**主构造函数**以及一个或多个**次构造函数**。主构造函数是类头的一部分
+
+```
+class Person constructor(firstName: String) { /*……*/ }
+//如果主构造函数没有任何注解或者可见性修饰符，可以省略 constructor 关键字
+class Person(firstName: String) { /*……*/ } 
+//constructor 不能省略
+class Customer public @Inject constructor(name: String) { /*……*/ } 
+```
+
+主构造函数不能包含任何的代码。初始化的代码可以放到以 *init* 关键字作为前缀的**初始化块（initializer blocks）**中, 初始化块可以有多个，初始化块和字段会按顺序执行初始化
+
+```
+    init {
+        println("init111")
+        //println(s)//报错，s 未初始化
+    }
+
+    var s = "filed s".also(::println)
+
+    init {
+        println("init222")
+    }
+```
+
+主构造的参数会作为类的属性，提供 get/set 方法（var 属性）或 get 方法（val 属性）
+
+次构造函数参数不会作为类属性
+
+###### 次构造函数
+
+如果类有一个主构造函数，每个次构造函数需要委托给主构造函数， 可以直接委托或者通过别的次构造函数间接委托。委托到同一个类的另一个构造函数用 **this** 关键字即可：
+
+```
+class View(val context: String) {
+
+    constructor(context: String, attr: String): this(context, attr, 0) {}
+
+    constructor(context: String, attr: String, theme: Int): this(context) {}
+
+}
+```
+
+***初始化块中的代码和字段初始化代码实际上会成为主构造函数的一部分***。委托给主构造函数会作为次构造函数的第一条语句，因此所有初始化块与属性初始化器中的代码都会在次构造函数体之前执行。***即使该类没有主构造函数，这种委托仍会隐式发生，并且仍会执行初始化块***
+
+如果一个非抽象类没有声明任何（主或次）构造函数，它会有一个生成的不带参数的主构造函数。构造函数的可见性是 public。如果你不希望你的类有一个公有构造函数，你需要声明一个带有非默认可见性的空的主构造函数：
+
+```
+class DontCreateMe private constructor () { /*……*/ }
+```
+
+要创建一个类的实例，我们就像普通函数一样调用构造函数, Kotlin 并没有 *new* 关键字
+
+##### 继承
+
+在 Kotlin 中所有类都有一个共同的超类 `Any`
+
+`Any` 有三个方法：`equals()`、 `hashCode()` 与 `toString()`
+
+默认情况下，Kotlin 类是最终（final）的：它们不能被继承。 要使一个类可继承，请用 `open` 关键字标记它。
+
+```
+open class Base // 该类开放继承
+```
+
+如果派生类有一个主构造函数，其基类必须就地初始化。
+
+如果派生类没有主构造函数，那么每个次构造函数必须使用 *super* 关键字初始化其基类型，或委托给另一个构造函数做到这一点
+
+```
+class TextView(text: String) : View("context", "attr") {//必须调基类构造函数
+    constructor(context: String, attr: String): this("123")//必须委托给主构造函数
+}
+
+class MyView : View {
+    constructor(ctx: Context) : super(ctx)
+}
+```
+
+###### 覆盖方法
+
+Kotlin 对于可覆盖的成员（我们称之为*开放*）以及覆盖后的成员需要显式修饰符：
+
+```
+open class Shape {
+    open fun draw() { /*……*/ }
+    fun fill() { /*……*/ }
+}
+
+class Circle() : Shape() {
+    override fun draw() { /*……*/ }
+}
+```
+
+将 *open* 修饰符添加到 final 类（即没有 *open* 的类）的成员上不起作用。
+
+标记为 *override* 的成员本身是开放的，可以在子类中覆盖。如果你想禁止再次覆盖，使用 *final* 关键字：
+
+```
+open class Rectangle() : Shape() {
+    final override fun draw() { /*……*/ }
+}
+```
+
+###### 覆盖属性
+
+属性覆盖与方法覆盖类似; 在超类中声明然后在派生类中重新声明的属性必须以 *override* 开头，并且它们必须具有兼容的类型。
+
+用一个 `var` 属性覆盖一个 `val` 属性，但反之则不行。 这是允许的，因为一个 `val` 属性本质上声明了一个 `get` 方法， 而将其覆盖为 `var` 只是在子类中额外声明一个 `set` 方法。
+
+可以在主构造函数中使用 *override* 关键字作为属性声明的一部分。
+
+```
+interface Shape {
+    val vertexCount: Int
+}
+
+class Rectangle(override val vertexCount: Int = 4) : Shape // 总是有 4 个顶点
+
+class Polygon : Shape {
+    override var vertexCount: Int = 0  // 以后可以设置为任何数
+}
+```
+
+###### 派生类初始化顺序
+
+在构造派生类的新实例的过程中，第一步完成其基类的初始化（在之前只有对基类构造函数参数的求值）
+
+先对基类构造函数参数求职 ---> 基类初始化 ---> 派生类初始化
+
+这意味着，基类构造函数执行时，派生类中声明或覆盖的属性都还没有初始化。如果在基类初始化逻辑中（直接或通过另一个覆盖的 *open* 成员的实现间接）使用了任何一个这种属性，那么都可能导致不正确的行为或运行时故障
+
+###### 调用超类实现
+
+派生类中的代码可以使用 *super* 关键字调用其超类的函数与属性访问器的实现：
+
+```
+class FilledRectangle: Rectangle() {
+    override fun draw() {
+        super.draw()
+        println("Filling the rectangle")
+    }
+    val borderColor: String get() = "black"
+    
+    inner class Filler {
+        fun fill() { /* …… */ }
+        fun drawAndFill() {
+            super@FilledRectangle.draw() // 调用 Rectangle 的 draw() 实现
+            fill()
+            println("Drawn a filled rectangle with color ${super@FilledRectangle.borderColor}") // 使用 Rectangle 所实现的 borderColor 的 get()
+        }
+    }
+```
+
+###### 覆盖规则
+
+如果一个类从它的直接超类继承相同成员的多个实现， 它必须覆盖这个成员并提供其自己的实现（也许用继承来的其中之一）。 为了表示采用从哪个超类型继承的实现，我们使用由尖括号中超类型名限定的 *super*，如 `super<Base>`：
+
+```
+open class Rectangle {
+    open fun draw() { /* …… */ }
+}
+
+interface Polygon {
+    fun draw() { /* …… */ } // 接口成员默认就是“open”的
+}
+
+class Square() : Rectangle(), Polygon {
+    // 编译器要求覆盖 draw()：
+    override fun draw() {
+        super<Rectangle>.draw() // 调用 Rectangle.draw()
+        super<Polygon>.draw() // 调用 Polygon.draw()
+    }
+}
+```
+
+##### 抽象类
+
+不需要用 `open` 标注一个抽象类或者函数——因为这不言而喻
+
+可以用一个抽象成员覆盖一个非抽象的开放成员
+
+```
+open class Polygon {
+    open fun draw() {}
+}
+
+abstract class Rectangle : Polygon() {
+    abstract override fun draw()
+}
+```
+
+##### 伴生对象
 
