@@ -20,6 +20,7 @@
                                 新建远程分支）
     git push origin :hotfix     删除远程hotfix分支（把空白分支推送到hotfix分支）
     git push                    把修改变化推入别名为"origin"的远程本库
+    git push --set-upstream origin v402 本地分支推送并关联远程分支
 
     git pull                    从远程版本库中取来修改变化，并合并到当前的本地分支
     git merge <name>            合并分支到当前分支
@@ -28,6 +29,7 @@
     git branch -r               列出远程所有分支
     git branch -a               列出所有分支
     git branch <name>           基于当前分支创建新分支
+    git branch -vv              查看本地分支关联的远程分支
     git branch bname origin/bname 基于指定分支创建新分支
     git branch -d bname         删除bname分支
 ***
