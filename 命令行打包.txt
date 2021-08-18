@@ -22,3 +22,4 @@
 	
 6.签名
 	jarsigner -verbose -keystore debug.keystore -storepass android -keypass android -signedjar gen\aaasigned.apk gen\aaa.apk androiddebugkey
+	apksigner sign --ks D:\dev\fddAssistant --out out.apk --in in.apk
