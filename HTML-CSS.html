@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- <base href="http://www.w3school.com.cn" /> -->
+    <base target="_blank" />
+
+    <title>HTML/CSS</title>
+
+    <style type="text/css">
+        span.tag {
+            color: red;
+        }
+
+        * {
+            font-family: 'Courier New', Courier, monospace;
+            line-height: 1.5;
+        }
+
+        .html5_new_note {
+            background: #ffffff url(res/html5_new_note.png) center left no-repeat;
+            padding-left: 20px;
+        }
+
+        /* ----------------------------------- 表格 ----------------------------------- */
+
+        table.dataintable {
+            margin-top: 15px;
+            border-collapse: collapse;
+            border: 1px solid #aaa;
+            width: 50%;
+        }
+
+        table.dataintable th {
+            vertical-align: baseline;
+            padding: 5px 5px 5px 5px;
+            background-color: #3F3F3F;
+            border: 1px solid #3F3F3F;
+            text-align: left;
+            color: #fff;
+        }
+
+        table.dataintable td {
+            vertical-align: text-top;
+            padding: 5px 5px 5px 5px;
+            border: 1px solid #aaa;
+        }
+
+        table.dataintable tr:nth-child(odd) {
+            background-color: #F5F5F5;
+        }
+
+        table.dataintable tr:nth-child(even) {
+            background-color: #fff;
+        }
+
+        table.dataintable pre {
+            width: auto;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            background-color: transparent;
+        }
+
+        table.dataintable p {
+            margin: 0 0 2px 0;
+        }
+
+        div#maincontent table.dataintable ul,
+        div#maincontent table.dataintable li {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        table.dataintable td em {
+            color: #0000ff;
+            font-weight: normal;
+        }
+
+        table.dataintable .table_value {
+            color: #0F93D2;
+        }
+
+        .no_wrap {
+            white-space: nowrap;
+        }
+
+        div#maincontent table.dataintable ul.listintable {
+            margin: 20px;
+            padding: 0;
+        }
+
+        div#maincontent table.dataintable ul.listintable li {
+            list-style-type: disc;
+        }
+
+
+        table.dataintable td.html5_new {
+            background: transparent url(res/html5_new_note.png) center right no-repeat;
+        }
+
+        tr.notsupported {
+            color: #999999;
+        }
+
+        p.deprecated,
+        span.deprecated {
+            color: #e80000;
+        }
+
+        div#maincontent p.deprecated {
+            margin-top: 9px;
+        }
+
+        div#maincontent table.dataintable p {
+            line-height: 130%;
+        }
+
+        /* ----------------------------------- 表格 ----------------------------------- */
+
+        span.note {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <a name="top" />
+
+    <h3>HTML 元素</h3>
+    <pre>
+        HTML 文档是由 HTML 元素定义的. HTML 元素指的是从开始标签（start tag）到结束标签（end tag）的所有代码。
+        元素的内容是开始标签与结束标签之间的内容
+
+        大多数 HTML 元素可以嵌套（可以包含其他 HTML 元素）。
+        HTML 文档由嵌套的 HTML 元素构成。
+    </pre>
+    <h5>空的 HTML 元素</h5>
+    <pre>
+        没有内容的 HTML 元素被称为空元素。空元素是在开始标签中关闭的。
+        &lt;br&gt; 就是没有关闭标签的空元素（&lt;br&gt; 标签定义换行）。
+        在 XHTML、XML 以及未来版本的 HTML 中，所有元素都必须被关闭。
+        即使 &lt;br&gt; 在所有浏览器中都是有效的，但使用 &lt;br /&gt; 其实是更长远的保障。
+        <span class="note">注释：</span>在未来的 HTML 版本中，不允许省略结束标签。
+    </pre>
+    <h5>HTML 提示:使用小写标签</h5>
+    <pre>
+        HTML 标签对大小写不敏感：&lt;P&gt; 等同于 &lt;p&gt;。许多网站都使用大写的 HTML 标签。
+        W3School 使用的是小写标签，因为万维网联盟（W3C）在 HTML 4 中推荐使用小写，而在未来 (X)HTML 版本中强制使用小写。
+    </pre>
+
+    <h3>HTML 属性</h3>
+    <pre>
+        HTML 标签可以拥有属性。属性提供了有关 HTML 元素的更多的信息。
+        属性总是以名称/值对的形式出现，比如：name="value"。
+
+        使用小写属性:
+            属性和属性值对大小写不敏感。
+            不过，万维网联盟在其 HTML 4 推荐标准中推荐小写的属性/属性值。而新版本的 (X)HTML 要求使用小写属性。
+
+        始终为属性值加引号
+        属性值应该始终被包括在引号内。双引号是最常用的，不过使用单引号也没有问题。
+        在某些个别的情况下，比如属性值本身就含有双引号，那么您必须使用单引号，例如：
+        name='Bill "HelloWorld" Gates'
+    </pre>
+
+    <h5>HTML 全局属性</h5>
+
+    <p class="html5_new_note">= HTML5 中添加的属性。</p>
+
+    <table class="dataintable">
+        <tr>
+            <th style="width:35%;">属性</th>
+            <th>描述</th>
+        </tr>
+
+        <tr>
+            <td><a href="/tags/att_standard_id.asp" title="HTML id 属性">id</a></td>
+            <td>规定元素的唯一 id。</td>
+        </tr>
+
+        <tr>
+            <td><a href="/tags/att_standard_class.asp" title="HTML class 属性">class</a></td>
+            <td>规定元素的一个或多个类名（引用样式表中的类）。</td>
+        </tr>
+
+        <tr>
+            <td><a href="/tags/att_standard_title.asp" title="HTML title 属性">title</a></td>
+            <td title="鼠标放上会提示 title 内容, 就像现在看到的一样">规定有关元素的额外信息。</td>
+        </tr>
+
+        <tr>
+            <td><a href="/tags/att_standard_style.asp" title="HTML style 属性">style</a></td>
+            <td>规定元素的行内 CSS 样式。</td>
+        </tr>
+
+        <tr>
+            <td><a href="/tags/att_standard_lang.asp" title="HTML lang 属性">lang</a></td>
+            <td>规定元素内容的语言。</td>
+        </tr>
+
+        <tr>
+            <td><a href="/tags/att_standard_tabindex.asp" title="HTML tabindex 属性">tabindex</a></td>
+            <td>规定元素的 tab 键次序。</td>
+        </tr>
+
+        <tr>
+            <td><a href="/tags/att_standard_dir.asp" title="HTML dir 属性">dir</a></td>
+            <td>规定元素中内容的文本方向。</td>
+        </tr>
+
+        <tr>
+            <td><a href="/tags/att_standard_accesskey.asp" title="HTML accesskey 属性">accesskey</a></td>
+            <td>规定激活元素的快捷键。</td>
+        </tr>
+
+        <tr>
+            <td class="html5_new"><a href="/tags/att_global_contenteditable.asp"
+                    title="HTML contenteditable 属性">contenteditable</a></td>
+            <td>规定元素内容是否可编辑。</td>
+        </tr>
+
+        <tr>
+            <td class="html5_new"><a href="/tags/att_global_contextmenu.asp" title="HTML contextmenu 属性">contextmenu</a>
+            </td>
+            <td>规定元素的上下文菜单。上下文菜单在用户点击元素时显示。</td>
+        </tr>
+
+        <tr>
+            <td class="html5_new"><a href="/tags/att_global_data.asp" title="HTML data-* 属性">data-*</a></td>
+            <td>用于存储页面或应用程序的私有定制数据。</td>
+        </tr>
+
+        <tr>
+            <td class="html5_new"><a href="/tags/att_global_draggable.asp" title="HTML draggable 属性">draggable</a>
+            </td>
+            <td>规定元素是否可拖动。</td>
+        </tr>
+
+        <tr>
+            <td class="html5_new"><a href="/tags/att_global_dropzone.asp" title="HTML dropzone 属性">dropzone</a></td>
+            <td>规定在拖动被拖动数据时是否进行复制、移动或链接。</td>
+        </tr>
+
+        <tr>
+            <td class="html5_new"><a href="/tags/att_global_hidden.asp" title="HTML hidden 属性">hidden</a></td>
+            <td>规定元素仍未或不再相关。</td>
+        </tr>
+
+        <tr>
+            <td class="html5_new"><a href="/tags/att_global_spellcheck.asp" title="HTML spellcheck 属性">spellcheck</a>
+            </td>
+            <td>规定是否对元素进行拼写和语法检查。</td>
+        </tr>
+
+        <tr>
+            <td class="html5_new"><a href="/tags/att_global_translate.asp" title="HTML translate 属性">translate</a>
+            </td>
+            <td>规定是否应该翻译元素内容。</td>
+        </tr>
+    </table>
+
+    <h3>HTML 标题（Heading） <span class="tag">&lt;h1&gt; - &lt;h6&gt;</span></h3>
+    <pre>
+        &lt;h1&gt;This is a heading&lt;/h1&gt;
+        &lt;h2&gt;This is a heading&lt;/h2&gt;
+        &lt;h3&gt;This is a heading&lt;/h3&gt;
+
+        <span class="note">注释：</span>默认情况下，HTML 会自动地在块级元素前后添加一个额外的空行，比如段落、标题元素前后。
+        请确保将 HTML heading 标签只用于标题。不要仅仅是为了产生粗体或大号的文本而使用标题。
+        搜索引擎使用标题为您的网页的结构和内容编制索引。
+        因为用户可以通过标题来快速浏览您的网页，所以用标题来呈现文档结构是很重要的。
+    </pre>
+
+    <h3>HTML 段落 <span class="tag">&lt;p&gt;</span></h3>
+    <pre>
+        &lt;p&gt;This is a paragraph.&lt;/p&gt;
+
+        <span class="note">注释：</span>浏览器会自动地在段落的前后添加空行。（&lt;p&gt; 是块级元素）
+    </pre>
+
+    <h3>HTML 链接 <span class="tag">&lt;a&gt;</span></h3>
+    <pre>
+        &lt;a href="http://www.w3school.com.cn"&gt;This is a link&lt;/a&gt;
+
+        <span class="note">超链接可以是文本,图片或其它 HTML 元素</span>，您可以点击这些内容来跳转到新的文档或者当前文档中的某个部分
+        有两种使用 &lt;a&gt; 标签的方式：
+            通过使用 href 属性 - 创建指向另一个文档的链接
+            通过使用 name 属性 - 创建文档内的书签
+    </pre>
+
+    <h5>HTML 链接 - name 属性</h5>
+    <pre>
+        name 属性规定锚（anchor）的名称.
+        命名锚的语法：
+            &lt;a name="label"&gt;（显示在页面上的文本）&lt;/a&gt;
+            也可以使用 id 属性来替代 name 属性，命名锚同样有效
+        示例:
+            &lt;a name="tips">有用的提示&lt;/a&gt;
+            &lt;a href="#tips">查看提示&lt;/a&gt;
+            也可以跳到其他页面的命名锚
+            &lt;a href="http://www.w3school.com.cn/html/html_links.asp#tips"&gt;查看提示&lt;/a&gt;
+
+            假如浏览器找不到已定义的命名锚，那么就会定位到文档的顶端。不会有错误发生。
+            注释：请始终将正斜杠添加到子文件夹。假如这样书写链接：href="http://www.w3school.com.cn/html"，就会向服务器产生两次 HTTP 请求。
+            这是因为服务器会添加正斜杠到这个地址，然后创建一个新的请求，就像这样：href="http://www.w3school.com.cn/html/"。
+    </pre>
+
+    <h3>HTML 图像 <span class="tag">&lt;img&gt;</span></h3>
+    <pre>
+        &lt;img src="w3school.jpg" width="104" height="142" alt="logo 图片" /&gt;
+        alt 属性用来为图像定义一串预备的可替换的文本,当浏览器无法载入图像时，替换文本属性可告诉读者他们失去的信息
+    </pre>
+
+    <h5>图片对齐方式 align 属性</h5>
+    <p>图像 <img src="res/eg_cute.gif" align="bottom"> 在文本中,底对齐 &lt;img src="res/eg_cute.gif" align="bottom"&gt;</p>
+
+    <p>图像 <img src="res/eg_cute.gif" align="middle"> 在文本中,居中对齐 align="middle"</p>
+
+    <p>图像 <img src="res/eg_cute.gif" align="top"> 在文本中,顶对齐 align="top"</p>
+
+    <h5>图像映射</h5>
+    <div>
+        <img src="res/eg_planets.jpg" usemap="#planetmap" alt="Planets" style="float: left;" />
+        <map name="planetmap" id="planetmap">
+            <area shape="circle" coords="180,139,14" href="/example/html/venus.html" target="_blank" alt="Venus" />
+            <area shape="circle" coords="129,161,10" href="/example/html/mercur.html" target="_blank" alt="Mercury" />
+            <area shape="rect" coords="0,0,110,260" href="/example/html/sun.html" target="_blank" alt="Sun" />
+        </map>
+        <pre style="float: left; margin-left: 2px;">
+            &lt;img src="res/eg_planets.jpg" usemap="#planetmap" alt="Planets"/&gt;
+            &lt;map name="planetmap" id="planetmap"&gt;
+                &lt;area shape="circle" coords="180,139,14" href="/example/html/venus.html" target="_blank" alt="Venus" /&gt;
+                &lt;area shape="circle" coords="129,161,10" href="/example/html/mercur.html" target="_blank" alt="Mercury" /&gt;
+                &lt;area shape="rect" coords="0,0,110,260" href="/example/html/sun.html" target="_blank" alt="Sun" /&gt;
+            &lt;/map>
+            </pre>
+        <p style="clear: both;"><b>注释：</b>img 元素中的 "usemap" 属性引用 map 元素中的 "id" 或 "name" 属性（根据浏览器），所以我们同时向 map 元素添加了 "id"
+            和 "name" 属性。</p>
+    </div>
+
+
+
+
+    <h3>HTML 水平线 <span class="tag">&lt;hr /&gt;</span></h3>
+
+    <h3>HTML 换行 <span class="tag">&lt;br /&gt;</span></h3>
+
+    <h3>HTML 注释 <span class="tag">&lt;!-- --&gt;</span></h3>
+
+    <h3>HTML 中的空格/空行</h3>
+    <div>
+        <pre>
+        当显示页面时，浏览器会移除源代码中多余的空格和空行。所有连续的空格或空行都会被算作一个空格。
+        需要注意的是，HTML 代码中的所有连续的空行（换行）也被显示为一个空格。
+        </pre>
+        <pre style="float: left;background-color: AntiqueWhite;">
+        &lt;p&gt;
+        这个段落
+        在源代码       中
+            包含   许多行
+        但是      浏览器
+        忽略了  它们。
+        &lt;/p&gt;
+        </pre>
+        <p style="float: left;margin-left: 20px;background-color: Aqua;">
+            显示效果 ==>
+        </p>
+        <p style="float: left;margin-left: 20px;background-color: AntiqueWhite;">
+            这个段落
+            在源代码 中
+            包含 许多行
+            但是 浏览器
+            忽略了 它们。
+        </p>
+        <p style="clear: both;"></p>
+    </div>
+
+    <h3>HTML 样式: style 属性</h3>
+    <pre>
+        style 属性的作用：
+        <span class="note">提供了一种改变 HTML 元素的样式的通用方法。</span>
+        样式是 HTML 4 引入的，它是一种新的首选的改变 HTML 元素样式的方式。通过 HTML 样式，
+        能够通过使用 style 属性直接将样式添加到 HTML 元素，或者间接地在独立的样式表中（CSS 文件）进行定义。
+
+        style 淘汰了一些旧的标签和属性:
+            background-color 属性淘汰了旧的 "bgcolor" 属性
+            font-family、color 以及 font-size 属性淘汰了旧的 &lt;font&gt; 标签
+            text-align 属性淘汰了旧的 "align" 属性
+
+        e.g. &lt;p style="background-color:blue;font-family:arial;color:red;font-size:20px;text-align: center;"&gt;A paragraph.&lt;/p&gt;
+    </pre>
+
+    <h3>HTML 文本格式化</h3>
+
+    <h5>文本格式化标签</h5>
+    <table class="dataintable">
+        <tr>
+            <th style="width:30%">标签</th>
+            <th style="width:70%">描述</th>
+        </tr>
+        <tr>
+            <td><a href="/tags/tag_font_style.asp">&lt;b&gt;</a></td>
+            <td>定义<b>粗体</b>文本。</td>
+        </tr>
+        <tr>
+            <td><a href="/tags/tag_font_style.asp">&lt;big&gt;</a></td>
+            <td>定义<big>大号</big>字。</td>
+        </tr>
+        <tr>
+            <td><a href="/tags/tag_phrase_elements.asp">&lt;em&gt;</a></td>
+            <td>定义<em>着重</em>文字。</td>
+        </tr>
+        <tr>
+            <td><a href="/tags/tag_font_style.asp">&lt;i&gt;</a></td>
+            <td>定义<i>斜体</i>字。</td>
+        </tr>
+        <tr>
+            <td><a href="/tags/tag_font_style.asp">&lt;small&gt;</a></td>
+            <td>定义<small>小号</small>字。</td>
+        </tr>
+        <tr>
+            <td><a href="/tags/tag_phrase_elements.asp">&lt;strong&gt;</a></td>
+            <td>定义<strong>加重</strong>语气。</td>
+        </tr>
+        <tr>
+            <td><a href="/tags/tag_sup.asp">&lt;sub&gt;</a></td>
+            <td>定义<sub>下标</sub>字。</td>
+        </tr>
+        <tr>
+            <td><a href="/tags/tag_sup.asp">&lt;sup&gt;</a></td>
+            <td>定义<sup>上标</sup>字。</td>
+        </tr>
+        <tr>
+            <td><a href="/tags/tag_ins.asp">&lt;ins&gt;</a></td>
+            <td>定义<ins>插入</ins>字。</td>
+        </tr>
+        <tr>
+            <td><a href="/tags/tag_del.asp">&lt;del&gt;</a></td>
+            <td>定义<del>删除</del>字。</td>
+        </tr>
+        <tr>
+            <td><a href="/tags/tag_strike.asp">&lt;s&gt;</a></td>
+            <td class="deprecated"><em>不赞成使用。</em>使用 &lt;del&gt; <s>代替</s>。</td>
+        </tr>
+        <tr>
+            <td><a href="/tags/tag_strike.asp">&lt;strike&gt;</a></td>
+            <td class="deprecated"><em>不赞成使用。</em>使用 &lt;del&gt; <strike>代替</strike>。</td>
+        </tr>
+        <tr>
+            <td><a href="/tags/tag_u.asp">&lt;u&gt;</a></td>
+            <td class="deprecated"><em>不赞成使用。</em>使用样式（style）<u>代替</u>。</td>
+        </tr>
+    </table>
+
+    <h5>“计算机输出”标签</h5>
+    <table class="dataintable">
+        <tr>
+            <th style="width:30%">标签</th>
+            <th style="width:70%">描述</th>
+        </tr>
+        <tr>
+            <td><a href="/tags/tag_phrase_elements.asp">&lt;code&gt;</a></td>
+            <td>定义计算机代码。不保留多余的空格和折行</td>
+        </tr>
+        <tr>
+            <td><a href="/tags/tag_phrase_elements.asp">&lt;kbd&gt;</a></td>
+            <td>定义键盘码。</td>
+        </tr>
+        <tr>
+            <td><a href="/tags/tag_phrase_elements.asp">&lt;samp&gt;</a></td>
+            <td>定义计算机代码样本。</td>
+        </tr>
+        <tr>
+            <td><a href="/tags/tag_font_style.asp">&lt;tt&gt;</a></td>
+            <td>定义打字机代码。</td>
+        </tr>
+        <tr>
+            <td><a href="/tags/tag_phrase_elements.asp">&lt;var&gt;</a></td>
+            <td>定义变量。</td>
+        </tr>
+        <tr>
+            <td><a href="/tags/tag_pre.asp">&lt;pre&gt;</a></td>
+            <td>定义预格式文本。<span class="note">会保留空格和换行</span></td>
+        </tr>
+    </table>
+
+    <h5>引用、引用和术语定义</h5>
+    <table class="dataintable">
+        <tr>
+            <th style="width:30%">标签</th>
+            <th style="width:70%">描述</th>
+        </tr>
+        <tr>
+            <td><a href="/tags/tag_abbr.asp">&lt;abbr&gt;</a></td>
+            <td>定义缩写。<br />对缩写进行标记能够为浏览器、翻译系统以及搜索引擎提供有用的信息.
+                The <abbr title="People's Republic of China">PRC</abbr> was founded in 1949.</td>
+        </tr>
+        <tr>
+            <td><a href="/tags/tag_acronym.asp">&lt;acronym&gt;</a></td>
+            <td>定义首字母缩写。HTML5 中已不支持。请使用 &lt;abbr&gt; 标签代替。</td>
+        </tr>
+        <tr>
+            <td><a href="/tags/tag_address.asp">&lt;address&gt;</a></td>
+            <td>定义地址,此元素通常以斜体显示。大多数浏览器会在此元素前后添加折行。<address>深圳市宝安区宝安中心壹方中心</address>
+            </td>
+        </tr>
+        <tr>
+            <td><a href="/tags/tag_bdo.asp">&lt;bdo&gt;</a></td>
+            <td>定义文字方向 <span class="note">dir 属性值:ltr,rtl</span> <bdo dir="rtl">Hello World</bdo></td>
+        </tr>
+        <tr>
+            <td><a href="/tags/tag_blockquote.asp">&lt;blockquote&gt;</a></td>
+            <td>定义长的引用,浏览器通常会对元素进行缩进处理。<blockquote>这是一段长引用</blockquote>
+            </td>
+        </tr>
+        <tr>
+            <td><a href="/tags/tag_q.asp">&lt;q&gt;</a></td>
+            <td>定义短的引用语,浏览器通常会为元素包围引号。<q>示例</q></td>
+        </tr>
+        <tr>
+            <td><a href="/tags/tag_phrase_elements.asp">&lt;cite&gt;</a></td>
+            <td>定义著作的标题,浏览器通常会以斜体显示。e.g.<cite>月亮与六便士</cite>作者是毛姆.</td>
+        </tr>
+        <tr>
+            <td><a href="/tags/tag_phrase_elements.asp">&lt;dfn&gt;</a></td>
+            <td>定义一个定义项目。</td>
+        </tr>
+    </table>
+
+    <h3>HTML CSS</h3>
+    <pre>
+        通过使用 HTML4.0，所有的格式化代码均可移出 HTML 文档，然后移入一个独立的样式表。
+        当浏览器读到一个样式表，它就会按照这个样式表来对文档进行格式化。有以下三种方式来插入样式表：
+        1.外部样式表
+            当样式需要被应用到很多页面的时候，外部样式表将是理想的选择。
+            &lt;link rel="stylesheet" type="text/css" href="mystyle.css"&gt;
+        2.内部样式表
+            当单个文件需要特别样式时，就可以使用内部样式表
+            &lt;style type="text/css"&gt;
+                body {background-color: red}
+                p {margin-left: 20px}
+            &lt;/style&gt;
+        3.内联样式
+            当特殊的样式需要应用到个别元素时，就可以使用内联样式
+            &lt;p style="color: red; margin-left: 20px"&gt;This is a paragraph&lt;/p&gt;
+    </pre>
+
+    <h3>HTML 表格 <span class="tag">&lt;table&gt;</span></h3>
+    <pre>
+        表格由 &lt;table&gt; 标签来定义。每个表格均有若干行（由 &lt;tr&gt; 标签定义），每行被分割为若干单元格（由 &lt;td&gt; 标签定义）。字母 td 指表格数据（table data），即数据单元格的内容。
+        表格的表头使用 &lt;th&gt; 标签进行定义, 大多数浏览器会把表头显示为粗体居中的文本
+        表格的标题使用 &lt;caption&gt;我的标题&lt;/caption&gt;
+
+        表格中的空单元格
+            在一些浏览器中，没有内容的表格单元显示得不太好。如果某个单元格是空的（&lt;td&gt;&lt;/td&gt;），浏览器可能无法显示出这个单元格的边框。
+            为了避免这种情况，在空单元格中添加一个空格占位符(&lt;td&gt;&amp;nbsp;&lt;/td&gt;)，就可以将边框显示出来
+        表格边距
+            cellpadding - 内边距 cellspacing - 外边距
+    </pre>
+    <div>
+        <div style="float: left;">
+            <table border="1px" cellpadding="5px" cellspacing="0px">
+                <caption>跨行跨列单元格</caption>
+                <tr>
+                    <th>None</th>
+                    <th>col title1</th>
+                    <th colspan="2">col title2&3</th>
+                </tr>
+                <tr>
+                    <th>row title1</th>
+                    <td>table data</td>
+                    <td>table data</td>
+                    <td>table data</td>
+                </tr>
+                <tr>
+                    <th rowspan="2">row title2</th>
+                    <td>table data</td>
+                    <td>table data</td>
+                    <td>table data</td>
+                </tr>
+                <tr>
+                    <td>table data</td>
+                    <td>table data</td>
+                    <td>table data</td>
+                </tr>
+                <tr>
+                    <th>row title3</th>
+                    <td>table data</td>
+                    <td>table data</td>
+                    <td>table data</td>
+                </tr>
+            </table>
+
+            <pre>
+                <b>frame 属性</b>
+                table <span class="note">frame</span> 属性控制边框
+                box - 四周显示边框
+                above - 只显示顶部边框
+                below - 只显示底部边框
+                hsides - 显示顶部和底部边框
+                vsides - 显示左边框和右边框
+            </pre>
+        </div>
+
+
+        <pre style="float: left;">
+            <b>跨行跨列单元格代码:</b>
+            &lt;table border="1px" cellpadding="5px" cellspacing="0px" style="float: left;"&gt;
+                &lt;caption&gt;跨行跨列单元格&lt;/caption&gt;
+                &lt;tr&gt;
+                    &lt;th&gt;None&lt;/th&gt;
+                    &lt;th&gt;col title1&lt;/th&gt;
+                    &lt;th colspan="2"&gt;col title2&3&lt;/th&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;th&gt;row title1&lt;/th&gt;
+                    &lt;td&gt;table data&lt;/td&gt;
+                    &lt;td&gt;table data&lt;/td&gt;
+                    &lt;td&gt;table data&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;th rowspan="2"&gt;row title2&lt;/th&gt;
+                    &lt;td&gt;table data&lt;/td&gt;
+                    &lt;td&gt;table data&lt;/td&gt;
+                    &lt;td&gt;table data&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;table data&lt;/td&gt;
+                    &lt;td&gt;table data&lt;/td&gt;
+                    &lt;td&gt;table data&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;th&gt;row title3&lt;/th&gt;
+                    &lt;td&gt;table data&lt;/td&gt;
+                    &lt;td&gt;table data&lt;/td&gt;
+                    &lt;td&gt;table data&lt;/td&gt;
+                &lt;/tr&gt;
+            &lt;/table&gt;
+        </pre>
+
+        <p style="clear: both;"></p>
+    </div>
+
+    <h3>HTML 列表</h3>
+    <pre>
+        无序列表: &lt;ul&gt; &lt;li&gt; type="disc|circle|square" type 属性修改项目符号类型
+        有序列表: &lt;ol&gt; &lt;li&gt; type="A|a|I|i" 大小写字母,大小写罗马字母
+        定义列表:
+            自定义列表不仅仅是一列项目，而是项目及其注释的组合。
+            自定义列表以 &lt;dl&gt; 标签开始。每个自定义列表项以 &lt;dt&gt; 开始。每个自定义列表项的定义以 &lt;dd&gt; 开始
+            &lt;dl&gt;
+                &lt;dt&gt;计算机&lt;/dt&gt;
+                &lt;dd&gt;用来计算的仪器 ... ...&lt;/dd&gt;
+                &lt;dt&gt;显示器&lt;/dt&gt;
+                &lt;dd&gt;以视觉方式显示信息的装置 ... ...&lt;/dd&gt;
+            &lt;/dl&gt;
+    </pre>
+
+    <h3>HTML <span class="tag">&lt;div&gt; 和 &lt;span&gt;</span></h3>
+    <pre>
+        大多数 HTML 元素被定义为块级元素或内联元素
+        块级元素在浏览器显示时，通常会以新行来开始（和结束） 如:&lt;h1&gt;, &lt;p&gt;, &lt;ul&gt;, &lt;table&gt;&lt;/table&gt;
+        内联元素在显示时通常不会以新行开始 如:&lt;b&gt;, &lt;td&gt;, &lt;a&gt;, &lt;img&gt;
+
+        &lt;div&gt; 元素是块级元素，它是可用于组合其他 HTML 元素的容器。没有特定的含义
+
+        &lt;span&gt; 元素是内联元素，可用作文本的容器。没有特定的含义
+    </pre>
+
+    <h3>HTML 类</h3>
+    <pre>
+        对 HTML 进行分类（设置类），使我们能够为元素的类定义 CSS 样式。
+        为相同的类设置相同的样式，或者为不同的类设置不同的样式。
+    </pre>
+
+    <h3>HTML <span class="tag">id</span> 属性</h3>
+    <pre>
+        HTML id 属性用于 为HTML 元素指定唯一的 id。
+        id 属性指定 HTML 元素的唯一 ID。 id 属性的值在 HTML 文档中必须是唯一的。
+        id 区分大小写
+        css 中引用 id: #id {}
+        js 中使用id: document.getElementById("id").innerHTML = "hello"
+    </pre>
+
+    <h3>HTML <span class="tag">&lt;iframe&gt;</span></h3>
+    <pre>
+        &lt;iframe src="URL" width="200" height="200" frameborder="0"&gt;&lt;/iframe&gt;
+        iframe 用于在网页内显示网页。
+
+        设置超链接在指定 iframe 中打开:
+        &lt;iframe src="demo_iframe.htm" <span style="color: red;">name="iframe_a"</span>&gt;&lt;/iframe&gt;
+        &lt;a href="http://www.w3school.com.cn" <span style="color: red;">target="iframe_a"</span>&gt;W3School.com.cn&lt;/a&gt;&lt;/p&gt;
+    </pre>
+
+    <h3>HTML JavaScript</h3>
+    <pre>
+        HTML &lt;script&gt; 标签用于定义客户端脚本（JavaScript）。
+
+        更改内容：document.getElementById("demo").innerHTML = "Hello JavaScript!";
+        更改样式：document.getElementById("demo").style.fontSize = "25px";
+        更改属性：document.getElementById("image").src = "picture.gif";
+
+        &lt;noscript&gt; 标签定义了替代内容，这些内容将显示给在浏览器中禁用了脚本或浏览器不支持脚本的用户：
+        &lt;noscript&gt;抱歉，您的浏览器不支持 JavaScript！&lt;/noscript&gt;
+    </pre>
+
+    <h3>HTML 头部元素</h3>
+    <pre>
+        &lt;head&gt; 元素是所有头部元素的容器。&lt;head&gt; 内的元素可包含脚本，指示浏览器在何处可以找到样式表，提供元信息，等等。
+        以下标签都可以添加到 head 部分：&lt;title&gt;、&lt;base&gt;、&lt;link&gt;、&lt;meta&gt;、&lt;script&gt; 以及 &lt;style&gt;。
+
+        &lt;title&gt; 标签定义文档的标题, 显示在网页标签栏中
+        &lt;base&gt; 标签为页面上的所有链接规定默认地址或默认目标（target）：
+            &lt;base href="http://www.w3school.com.cn/images/" /&gt;
+            &lt;base target="_blank" /&gt;
+    </pre>
+
+    <h3>HTML 字符实体</h3>
+    <pre>
+        HTML 中的预留字符必须被替换为字符实体。
+        如果希望正确地显示预留字符，我们必须在 HTML 源代码中使用字符实体（character entities）。
+            &entity_name; 或者&#entity_number;
+        如需显示小于号，我们必须这样写：&lt; 或 &#60;
+
+        不间断空格（non-breaking space）
+        浏览器总是会截短 HTML 页面中的空格。如果您在文本中写 10 个空格，在显示该页面之前，浏览器会删除它们中的 9 个。如需在页面中增加空格的数量，您需要使用 &amp;nbsp; 字符实体。
+
+        要显示键盘无法输入的字符请用 &#number; 任何字符都可以用这种方式显示 A - &amp;#65;
+    </pre>
+
+    <h3>HTML 框架 <span class="tag">&lt;frameset&gt;</span></h3>
+    <pre>
+        通过使用框架，你可以在同一个浏览器窗口中显示不止一个页面。每份HTML文档称为一个框架，并且每个框架都独立于其他的框架。
+        使用框架的坏处：
+            开发人员必须同时跟踪更多的HTML文档
+            很难打印整张页面
+
+        &lt;frameset cols|rows="25%,75%"|"120,*"&gt; 大小可以用百分比 或绝对值
+            &lt;frame src="frame_a.htm" noresize="noresize"&gt; noresize 不能调整大小,默认是可以的
+            &lt;frame src="frame_b.htm"&gt;
+        &lt;/frameset&gt;
+        &lt;noframes&gt;
+            &lt;body&gt;您的浏览器无法处理框架！&lt;/body&gt;
+        &lt;/noframes&gt;
+    </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+    <br /><br /><br /><br /><br /><br /><br /><br />
+    <a href="#top" target="_self">回顶部</a>
+</body>
+
+</html>
