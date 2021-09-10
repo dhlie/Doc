@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="res/common.css" />
+
+    <title>CSS 教程</title>
+</head>
+
+<body>
+
+    <h3>CSS 简介</h3>
+    <pre>
+        CSS 指的是层叠样式表/也称级联样式表 (Cascading Style Sheets)
+        CSS 描述了如何在屏幕、纸张或其他媒体上显示 HTML 元素
+        外部样式表存储在 CSS 文件中
+    </pre>
+
+    <h3>CSS 语法</h3>
+    <pre>
+        CSS 规则集（rule-set）由选择器和声明块组成：
+        <img src="res/selector.gif" alt="css 语法" />
+    </pre>
+
+    <h3>CSS 选择器</h3>
+    <pre>
+        CSS 选择器用于“查找”（或选取）要设置样式的 HTML 元素。
+        可以将 CSS 选择器分为五类：
+            简单选择器（根据名称、id、类来选取元素）
+            组合器选择器（根据它们之间的特定关系来选取元素）
+            伪类选择器（根据特定状态选取元素）
+            伪元素选择器（选取元素的一部分并设置其样式）
+            属性选择器（根据属性或属性值来选取元素）
+    </pre>
+
+    <table class="dataintable">
+        <caption>所有简单的 CSS 选择器</caption>
+        <tr>
+            <th>选择器</th>
+            <th>例子</th>
+            <th>例子描述</th>
+        </tr>
+
+        <tr>
+            <td>.<i>class</i></td>
+            <td>.intro</td>
+            <td>
+                选取所有 class=&quot;intro&quot; 的元素。<br />
+                div.classname {} 选取所有具有 class="classname" 属性的 div 元素<br />
+                HTML 元素也可以引用多个类。&lt;p class="center large"&gt;这个段落引用两个类。&lt;/p&gt;
+            </td>
+        </tr>
+
+        <tr>
+            <td>#<i>id</i></td>
+            <td>#firstname</td>
+            <td>
+                选取 id=&quot;firstname&quot; 的那个元素。<br />
+                元素的 id 在页面中是唯一的，因此 id 选择器用于选择一个唯一的元素！
+            </td>
+        </tr>
+
+        <tr>
+            <td>*</td>
+            <td>*</td>
+            <td>选取所有元素。</td>
+        </tr>
+
+        <tr>
+            <td><i>element</i></td>
+            <td>p</td>
+            <td>选取所有 &lt;p&gt; 元素。</td>
+        </tr>
+
+        <tr>
+            <td><i>element</i>,<i>element</i>,..</td>
+            <td>div, p</td>
+            <td>选取所有 &lt;div&gt; 元素和所有 &lt;p&gt; 元素。</td>
+        </tr>
+    </table>
+    如需对选择器进行分组，请用逗号来分隔每个选择器。
+        h1, h2, p {}
+
+    <h3>如何添加 CSS</h3>
+    <pre>
+        当浏览器读到样式表时，它将根据样式表中的信息来格式化 HTML 文档。
+        有三种插入样式表的方法：
+            外部 CSS
+                外部样式表可以在任何文本编辑器中编写，并且必须以 .css 扩展名保存。
+                外部 .css 文件不应包含任何 HTML 标签。
+                <link rel="stylesheet" type="text/css" href="mystyle.css">
+            内部 CSS
+                内部样式是在 head 部分的 &lt;style&gt; 元素中进行定义。
+            行内 CSS
+                行内样式（也称内联样式）可用于为单个元素应用唯一的样式。
+                行内样式在相关元素的 "style" 属性中定义：
+
+            多个样式表
+                如果在不同样式表中为同一选择器（元素）定义了一些属性，则将使用最后读取的样式表中的值。
+
+            页面中的所有样式将按照以下规则“层叠”为新的“虚拟”样式表，其中第一优先级最高：
+                1.行内样式（在 HTML 元素中）
+                2.外部和内部样式表（在 head 部分）, 区分定义先后顺序
+                3.浏览器默认样式
+            因此，行内样式具有最高优先级，并且将覆盖外部和内部样式以及浏览器默认样式。
+    </pre>
+
+    <h3>CSS 注释</h3>
+    <pre>
+        位于 &lt;style&gt; 元素内的 CSS 注释，以 /* 开始，以 */ 结束：
+            p {
+                color: red;  /* 把文本设置为红色 */
+            }
+    </pre>
+
+
+
+    <br /><br /><br /><br /><br /><br /><br /><br />
+    <a href="#top" target="_self">回顶部</a>
+</body>
+
+</html>
