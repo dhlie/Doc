@@ -12,13 +12,18 @@
     <title>HTML/CSS</title>
 
     <style type="text/css">
-        span.tag {
-            color: red;
-        }
-
         * {
             font-family: 'Courier New', Courier, monospace;
             line-height: 1.5;
+        }
+
+        span.tag,
+        span.notice {
+            color: red;
+        }
+
+        span.note {
+            font-weight: bold;
         }
 
         .html5_new_note {
@@ -122,10 +127,6 @@
         }
 
         /* ----------------------------------- 表格 ----------------------------------- */
-
-        span.note {
-            font-weight: bold;
-        }
     </style>
 </head>
 
@@ -748,6 +749,630 @@
         &lt;noframes&gt;
             &lt;body&gt;您的浏览器无法处理框架！&lt;/body&gt;
         &lt;/noframes&gt;
+
+        <span class="notice">重要提示：</span>不能将 &lt;body&gt;&lt;/body&gt; 标签与 &lt;frameset&gt;&lt;/frameset&gt; 标签同时使用！
+        不过，假如你添加包含一段文本的 &lt;noframes&gt; 标签，就必须将这段文字嵌套于 &lt;body&gt;&lt;/body&gt; 标签内。
+    </pre>
+
+    <h3>HTML 表单 <span class="tag">&lt;form&gt;</span></h3>
+
+    <h5>HTML Form 属性</h5>
+    <table class="dataintable">
+        <tr>
+            <th>属性</th>
+            <th>描述</th>
+        </tr>
+
+        <tr>
+            <td>action</td>
+            <td>规定向何处提交表单的地址（URL）（提交页面）。</td>
+        </tr>
+
+        <tr>
+            <td>method</td>
+            <td>规定在提交表单时所用的 HTTP 方法（默认：GET）。</td>
+        </tr>
+
+        <tr>
+            <td>target</td>
+            <td>
+                规定 action 属性中地址的目标（默认：_self）。 <br />
+                <ul>
+                    <li>_blank 响应显示在新窗口或选项卡中。</li>
+                    <li>_self 响应显示在当前窗口中。</li>
+                    <li>_parent 响应显示在父框架中。</li>
+                    <li>_top 响应显示在窗口的整个 body 中。</li>
+                    <li>framename 响应显示在命名的 iframe 中。</li>
+                </ul>
+            </td>
+        </tr>
+
+        <tr>
+            <td>name</td>
+            <td>规定识别表单的名称（对于 DOM 使用：document.forms.name）。</td>
+        </tr>
+
+        <tr>
+            <td>accept-charset</td>
+            <td>规定在被提交表单中使用的字符集（默认：页面字符集）。</td>
+        </tr>
+
+        <tr>
+            <td>autocomplete</td>
+            <td>规定浏览器应该自动完成表单（默认：开启）。</td>
+        </tr>
+
+        <tr>
+            <td>enctype</td>
+            <td>规定被提交数据的编码（默认：url-encoded）。</td>
+        </tr>
+
+        <tr>
+            <td>novalidate</td>
+            <td>规定浏览器不验证表单。</td>
+        </tr>
+    </table>
+
+    <h5>表单元素</h5>
+    <pre>
+        每个表单元素必须有 name 属性, 没有 name 属性的元素不会被提交
+
+        <span class="tag">&lt;fieldset&gt;</span> 元素可将表单内的相关元素分组。当一组表单元素放到 &lt;fieldset&gt; 标签内时，浏览器会以特殊方式来显示它们，它们可能有特殊的边界、3D 效果
+        <span class="tag">&lt;legend&gt;</span> 标签为 fieldset 元素定义标题
+    </pre>
+    <div>
+        <pre style="float: left;">
+            &lt;form&gt;
+                &lt;fieldset&gt;
+                    &lt;legend&gt;health information&lt;/legend&gt;
+                    height: &lt;input type="text" /&gt;
+                    weight: &lt;input type="text" /&gt;
+                &lt;/fieldset&gt;
+            &lt;/form&gt;
+        </pre>
+        <p style="float: left;margin-left: 20px;">显示为 =></p>
+        <form style="float: left;margin-left: 20px;">
+            <fieldset>
+                <legend>health information</legend>
+                height: <input type="text" />
+                weight: <input type="text" />
+            </fieldset>
+        </form>
+        <p style="clear:both"></p>
+    </div>
+    <pre>
+        <span class="tag">&lt;input&gt;</span> 元素是最重要的表单元素,根据不同的 <span class="note">type</span> 属性，可以变化为多种形态。
+            input 类型:
+                text 文本输入类型
+                password 密码输入类型,字符会被做掩码处理（显示为星号或实心圆）
+                submit 定义提交表单数据至表单处理程序的按钮
+                radio 定义单选按钮
+                    &lt;input type="radio" name="sex" value="male" checkedt&gt;Male
+                    &lt;input type="radio" name="sex" value="female"t&gt;Female
+                checkbox 定义复选框,复选框允许用户在有限数量的选项中选择零个或多个选项。
+                    &lt;input type="checkbox" name="vehicle" value="Bike"&gt;I have a bike
+                    &lt;input type="checkbox" name="vehicle" value="Car"&gt;I have a car 
+                button 定义按钮
+                    &lt;input type="button" onclick="alert(''Hello World!')" value="Click Me!"/>
+                number 只能输入数字
+                    &lt;input type="number" name="quantity" min="1" max="5" step="2"&gt;
+                date 输入日期
+                    &lt;input type="date" name="bday" max="1979-12-31" min="2000-01-02"&gt;
+                color 输入颜色
+                range 输入范围数值
+                    &lt;input type="range" name="points" min="0" max="10"&gt;
+                month 选择月份和年份
+                week 选择周和年
+                time 选择时间（无时区）
+                datetime 选择日期和时间（有时区）
+                datetime-local 选择日期和时间（无时区）
+                email 电子邮件地址
+                search 用于搜索字段（搜索字段的表现类似常规文本字段）
+                tel 电话号码的输入字段
+                url URL 地址的输入字段
+            
+            input 属性:
+                value 规定输入字段的初始值
+                readonly 规定输入字段为只读（不能修改） readonly 属性不需要值。它等同于 readonly="readonly"
+                    &lt;input type="text" name="firstname" value="John" readonly&gt;
+                disabled 规定输入字段是禁用的,被禁用的元素是不可用和不可点击的,也不会被提交
+                size 规定输入字段的尺寸（以字符计）
+                maxlength 规定输入字段允许的最大长度, 如设置 maxlength 属性，则输入控件不会接受超过所允许数的字符
+                autocomplete 表单或输入字段是否应该自动完成,当自动完成开启，浏览器会基于用户之前的输入值自动填写值
+                autofocus 规定当页面加载时 &lt;input&gt; 元素应该自动获得焦点
+                    &lt;input type="text" name="fname" autofocus&gt;
+                form 规定 &lt;input&gt; 元素所属的一个或多个表单, 如需引用一个以上的表单，请使用空格分隔的表单 id 列表
+                    &lt;form action="action_page.php" id="form1"&gt;
+                        First name:  &lt;input type="text" name="fname"&gt; &lt;br&gt;
+                        &lt;input type="submit" value="Submit"&gt;
+                    &lt;/form&gt;
+                    <span class="note">&lt;!--输入字段位于 HTML 表单之外（但仍属表单）--&gt;</span>
+                    Last name:  &lt;input type="text" name="lname" form="form1"&gt;
+                formaction 规定当提交表单时处理该输入控件的文件的 URL。覆盖 &lt;form&gt; 元素的 action 属性。适用于 type="submit" 以及 type="image"。
+                    &lt;form action="action_page.php"&gt;
+                        name: &lt;input type="text" name="fname"&gt;&lt;br&gt;
+                        &lt;input type="submit" value="Submit"&gt;&lt;br&gt;
+                        &lt;input type="submit" formaction="demo_admin.asp" value="Submit as admin"&gt;
+                        <span class="note">&lt;!--两个提交按钮并对于不同动作--&gt;</span>
+                    &lt;/form&gt; 
+                formenctype 覆盖 &lt;form&gt; 元素的 enctype 属性。适用于 type="submit" 以及 type="image"。
+                formmethod 覆盖 &lt;form&gt; 元素的 method 属性。适用于 type="submit" 以及 type="image"。
+                formnovalidate 覆盖 &lt;form&gt; 元素的 novalidate 属性。适用于 type="submit" 以及 type="image"。
+                formtarget 覆盖 &lt;form&gt; 元素的 target 属性。适用于 type="submit" 以及 type="image"。
+                height 和 width 属性规定 &lt;form&gt; 元素的高度和宽度。仅用于 &lt;input type="image"&gt;。
+                    <span class="note">注释：请始终规定图像的尺寸。如果浏览器不清楚图像尺寸，则页面会在图像加载时闪烁。</span>
+                    &lt;input type="image" src="img_submit.gif" alt="Submit" width="48" height="48"&gt;
+                list 引用的 &lt;datalist&gt; 元素中包含了 &lt;input&gt; 元素的预定义选项。示例参考下面的 &lt;datalist&gt; 标签
+                min 和 max 属性规定 &lt;input&gt; 元素的最小值和最大值。
+                    min 和 max 属性适用于如需输入类型：number、range、date、datetime、datetime-local、month、time 以及 week。
+                step 规定 &lt;input&gt; 元素的合法数字间隔。step 属性可与 max 以及 min 属性一同使用，来创建合法值的范围。
+                multiple 如果设置，则规定允许用户在 &lt;input&gt; 元素中输入一个以上的值。multiple 属性适用于以下输入类型：email 和 file。
+                pattern 规定用于检查 &lt;input&gt; 元素值的正则表达式。
+                    适用于以下输入类型：text、search、url、tel、email、and password。
+                    &lt;!--只能输入三个字母--&gt;
+                    &lt;input type="text" name="country_code" pattern="[A-Za-z]{3}" title="Three letter country code"&gt;
+                placeholder 规定用以描述输入字段预期值的提示(text hint)
+                    适用于以下输入类型：text、search、url、tel、email 以及 password。
+                required 规定在提交表单之前必须填写输入字段。
+
+
+        <span class="tag">&lt;select&gt;</span> 元素（下拉列表）
+        <span class="tag">&lt;option&gt;</span> 元素定义待选择的选项。列表通常会把首个选项显示为被选选项。通过添加 selected 属性来定义预定义选项
+            &lt;option value="fiat" selected&gt;Fiat&lt;/option&gt;
+        <span class="tag">&lt;textarea&gt;</span> 元素定义多行输入字段（文本域）
+        <span class="tag">&lt;button&gt;</span> 元素定义可点击的按钮
+            &lt;button type="button" onclick="alert('Hello World!')"&gt;Click Me!&lt;/button&gt;
+            &lt;input type="button" onclick="alert(''Hello World!')" value="Click Me!"/>
+        <span class="tag">&lt;datalist&gt;</span> 元素为 &lt;input&gt; 元素规定预定义选项列表。
+            用户会在他们输入数据时看到预定义选项的下拉列表。
+            &lt;input&gt; 元素的 list 属性必须引用 &lt;datalist&gt; 元素的 id 属性。
+            &lt;form action="action_page.php"&gt;
+                &lt;input list="browsers"&gt;
+                &lt;datalist id="browsers"&gt;
+                   &lt;option value="Internet Explorer"&gt;
+                   &lt;option value="Firefox"&gt;
+                   &lt;option value="Chrome"&gt;
+                   &lt;option value="Opera"&gt;
+                   &lt;option value="Safari"&gt;
+                &lt;/datalist&gt; 
+            &lt;/form&gt;
+    </pre>
+
+    <h3>HTML5 Canvas</h3>
+    <pre>
+        canvas 元素用于在网页上绘制图形。使用 JavaScript 在网页上绘制图像。
+        画布是一个矩形区域，您可以控制其每一像素。
+        &lt;canvas id="myCanvas" width="200" height="100"&gt;你的浏览器不支持 HTML5 Canvas&lt;/canvas&gt;
+        &lt;img id="scream" width="224" height="162" src="/i/eg_flower.png" alt="The Scream"&gt;
+        &lt;script type="text/javascript"&gt;
+            var c=document.getElementById("myCanvas");
+            var cxt=c.getContext("2d"); &lt;!--getContext("2d") 对象是内建的 HTML5 对象，拥有多种绘制路径、矩形、圆形、字符以及添加图像的方法。--&gt;
+            cxt.fillStyle="#FF0000";
+            cxt.fillRect(0,0,150,75);
+            cxt.moveTo(10,10);
+            cxt.lineTo(150,50);
+            var img = document.getElementById("scream");
+            ctx.drawImage(img, 10, 10);
+        &lt;/script&gt;
+    </pre>
+
+    <h3>HTML5 支持内联 SVG</h3>
+    <pre>
+        在 HTML5 中，您能够将 SVG 元素直接嵌入 HTML 页面中：
+        &lt;svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="190"&gt;
+            &lt;polygon points="100,10 40,180 190,60 10,60 160,180"
+            style="fill:lime;stroke:purple;stroke-width:5;fill-rule:evenodd;" /&gt;
+        &lt;/svg&gt;
+    </pre>
+
+    <h3>HTML <span class="tag">&lt;audio&gt;</span></h3>
+    <pre>
+        浏览器插件是一种扩展浏览器标准功能的小型计算机程序。
+        可使用 &lt;object&gt; 或 &lt;embed&gt; 标签来将插件添加到 HTML 页面。
+        这些标签定义资源（通常非 HTML 资源）的容器，根据类型，它们即会由浏览器显示，也会由外部插件显示。
+
+        下面的代码片段能够显示嵌入网页中的 MP3 文件：
+        &lt;embed height="100" width="100" src="song.mp3" /&gt;
+        &lt;object height="100" width="100" data="song.mp3"&gt;&lt;/object&gt;
+        <span class="note">问题：</span>
+            &lt;embed&gt; 标签在 HTML 4 中是无效的。页面无法通过 HTML 4 验证。
+            不同的浏览器对音频格式的支持也不同。
+            如果浏览器不支持该文件格式，没有插件的话就无法播放该音频。
+            如果用户的计算机未安装插件，无法播放音频。
+            如果把该文件转换为其他格式，仍然无法在所有浏览器中播放。
+
+        &lt;audio&gt; 元素是一个 HTML5 元素，在 HTML 4 中是非法的
+        最好的 HTML 解决方法
+        &lt;audio controls="controls" height="100" width="100"&gt;
+            &lt;source src="song.mp3" type="audio/mp3" /&gt;
+            &lt;source src="song.ogg" type="audio/ogg" /&gt;
+            &lt;embed height="100" width="100" src="song.mp3" /&gt;
+        &lt;/audio&gt;
+        上面的例子使用了两个不同的音频格式。HTML5 &lt;audio&gt; 元素会尝试以 mp3 或 ogg 来播放音频。如果失败，代码将回退尝试 &lt;embed&gt; 元素。
+    </pre>
+
+    <h3>HTML <span class="tag">&lt;video&gt;</span></h3>
+    <pre>
+        下面的 HTML 代码显示嵌入网页的 Flash 视频：
+        &lt;embed src="movie.swf" height="200" width="200"/&gt;
+        &lt;object data="movie.swf" height="200" width="200"/&gt;
+        <span class="note">问题：</span>
+            HTML4 无法识别 &lt;embed&gt; 标签。您的页面无法通过验证。
+            如果浏览器不支持 Flash，那么视频将无法播放
+            iPad 和 iPhone 不能显示 Flash 视频。
+            如果您将视频转换为其他格式，那么它仍然不能在所有浏览器中播放。
+
+        &lt;video&gt; 是 HTML 5 中的新标签。作用是在 HTML 页面中嵌入视频元素。
+        最好的 HTML 解决方法:HTML 5 + &lt;object&gt; + &lt;embed&gt;
+        &lt;video width="320" height="240" controls="controls"&gt;
+            &lt;source src="movie.mp4" type="video/mp4" /&gt;
+            &lt;source src="movie.ogg" type="video/ogg" /&gt;
+            &lt;source src="movie.webm" type="video/webm" /&gt;
+            &lt;object data="movie.mp4" width="320" height="240"&gt;
+                &lt;embed src="movie.swf" width="320" height="240" /&gt;
+            &lt;/object&gt;
+        &lt;/video&gt;
+        上例中使用了 4 中不同的视频格式。HTML 5 &lt;video&gt; 元素会尝试播放以 mp4、ogg 或 webm 格式中的一种来播放视频。如果均失败，则回退到 &lt;embed&gt; 元素。
+    </pre>
+
+    <h3>HTML5 简介</h3>
+    <pre>
+        HTML5 是最新的 HTML 标准。
+        HTML5 是专门为承载丰富的 web 内容而设计的，并且无需额外插件。
+        HTML5 拥有新的语义、图形以及多媒体元素。
+        HTML5 提供的新元素和新的 API 简化了 web 应用程序的搭建。
+        HTML5 是跨平台的，被设计为在不同类型的硬件（PC、平板、手机、电视机等等）之上运行。
+    </pre>
+
+    <h3>HTML5 浏览器支持</h3>
+    <pre>
+        您可以帮助老版本浏览器处理 HTML5。
+
+        HTML5 浏览器支持
+        所有现代浏览器都支持 HTML5。
+        此外，所有浏览器，不论新旧，都会自动把未识别元素当做行内元素来处理。
+        正因如此，您可以帮助老式浏览器处理”未知的“ HTML 元素。
+
+        把 HTML5 元素定义为块级元素
+        HTML5 定义了八个新的语义 HTML 元素。所有都是块级元素。
+        您可以把 CSS display 属性设置为 block，以确保老式浏览器中正确的行为：
+            header, section, footer, aside, nav, main, article, figure {
+                display: block; 
+            }
+
+        向 HTML 添加新元素
+        您可以通过浏览器 trick 向 HTML 添加任何新元素：
+        本例向 HTML 添加了一个名为 <myHero> 的新元素，并为其定义 display 样式：
+            &lt;!DOCTYPE html&gt;
+            &lt;html&gt;
+            &lt;head&gt;
+                &lt;title&gt;Creating an HTML Element&lt;/title&gt;
+                &lt;script&gt;document.createElement(&quot;myHero&quot;)&lt;/script&gt;
+                &lt;style&gt;
+                    myHero {
+                        display: block;
+                        background-color: #ddd;
+                        padding: 50px;
+                        font-size: 30px;
+                    } 
+                &lt;/style&gt; 
+            &lt;/head&gt;
+
+            &lt;body&gt;
+                &lt;h1&gt;My First Heading&lt;/h1&gt;
+                &lt;p&gt;My first paragraph.&lt;/p&gt;
+                &lt;myHero&gt;My First Hero&lt;/myHero&gt;
+            &lt;/body&gt;
+            &lt;/html&gt;
+
+        上述方案可用于所有新的 HTML5 元素
+        幸运的是，Sjoerd Visscher 创造了 "HTML5 Enabling JavaScript", "<span class="note">the shiv</span>"：
+            &lt;!--[if lt IE 9]&gt;
+                &lt;script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"&gt;&lt;/script&gt;
+            &lt;![endif]--&gt;
+
+        完整的 Shiv 解决方案
+            &lt;!DOCTYPE html&gt;
+            &lt;html&gt;
+            &lt;head&gt;
+                &lt;title&gt;Styling HTML5&lt;/title&gt;
+                &lt;!--[if lt IE 9]&gt;
+                    &lt;script src=&quot;http://html5shiv.googlecode.com/svn/trunk/html5.js&quot;&gt;&lt;/script&gt;
+                &lt;![endif]--&gt;
+            &lt;/head&gt;
+            
+            &lt;body&gt;
+                &lt;h1&gt;My First Article&lt;/h1&gt;
+                
+                &lt;!--<span class="notice">H5新标签</span>--&gt;
+                &lt;article&gt;
+                    London is the capital city of England. 
+                    It is the most populous city in the United Kingdom, 
+                    with a metropolitan area of over 13 million inhabitants.
+                &lt;/article&gt;
+            
+            &lt;/body&gt;
+            &lt;/html&gt;
+    </pre>
+
+    <h3>HTML5 地理定位</h3>
+    <pre>
+        HTML5 Geolocation API 用于获得用户的地理位置。
+        鉴于该特性可能侵犯用户的隐私，除非用户同意，否则用户位置信息是不可用的。
+        使用 getCurrentPosition() 方法来获得用户的位置。
+
+        function getLocation() {
+            if (navigator.geolocation) {//检测是否支持地理定位
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                x.innerHTML="浏览器不支持定位";
+            }
+        }
+        function showPosition(position) {
+            x.innerHTML="Latitude: " + position.coords.latitude + " Longitude: " + position.coords.longitude;
+        }
+        function showError(error) {
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    x.innerHTML="User denied the request for Geolocation."
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    x.innerHTML="Location information is unavailable."
+                    break;
+                case error.TIMEOUT:
+                    x.innerHTML="The request to get user location timed out."
+                    break;
+                case error.UNKNOWN_ERROR:
+                    x.innerHTML="An unknown error occurred."
+                    break;
+            }
+        }
+    </pre>
+    <span class="note">getCurrentPosition() 方法 - 返回数据</span>
+    <br />
+    若成功，则 getCurrentPosition() 方法返回对象。始终会返回 latitude、longitude 以及 accuracy 属性。如果可用，则会返回其他下面的属性。
+    <table class="dataintable">
+        <tr>
+            <th style="width:40%;">属性</th>
+            <th>描述</th>
+        </tr>
+
+        <tr>
+            <td>coords.latitude</td>
+            <td>十进制数的纬度</td>
+        </tr>
+
+        <tr>
+            <td>coords.longitude</td>
+            <td>十进制数的经度</td>
+        </tr>
+
+        <tr>
+            <td>coords.accuracy</td>
+            <td>位置精度</td>
+        </tr>
+
+        <tr>
+            <td>coords.altitude</td>
+            <td>海拔，海平面以上以米计</td>
+        </tr>
+
+        <tr>
+            <td>coords.altitudeAccuracy</td>
+            <td>位置的海拔精度</td>
+        </tr>
+
+        <tr>
+            <td>coords.heading</td>
+            <td>方向，从正北开始以度计</td>
+        </tr>
+
+        <tr>
+            <td>coords.speed</td>
+            <td>速度，以米/每秒计</td>
+        </tr>
+
+        <tr>
+            <td>timestamp</td>
+            <td>响应的日期/时间</td>
+        </tr>
+    </table>
+    <pre>
+        Geolocation 对象 - 其他有趣的方法
+        watchPosition() - 返回用户的当前位置，并继续返回用户移动时的更新位置（就像汽车上的 GPS）。
+        clearWatch() - 停止 watchPosition() 方法        
+    </pre>
+
+    <h3>HTML5 拖放</h3>
+    <div>
+        <script>
+            function allowDrop(ev) {
+                ev.preventDefault();
+            }
+
+            function drag(ev) {
+                ev.dataTransfer.setData("text", ev.target.id);
+            }
+
+            function drop(ev) {
+                ev.preventDefault();
+                var data = ev.dataTransfer.getData("text");
+                ev.target.appendChild(document.getElementById(data));
+            }
+        </script>
+
+        <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"
+            style="float:left; width:198px; height:66px; margin:10px; padding:0px; border:1px solid #aaaaaa;">
+            <img style="margin:0; padding:10px;" id="drag1" src="res/eg_dragdrop_w3school.gif" draggable="true" ondragstart="drag(event)" id="drag1">
+        </div>
+
+        <div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"
+            style="float:left; width:198px; height:66px; margin:10px; padding:0px; border:1px solid #aaaaaa;"></div>
+
+        <p style="clear:both; font-size:14px;" class="marked">请把 W3School 图片拖到矩形中。</p>
+        <pre>
+    &lt;script&gt;
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.id);
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("text");
+            ev.target.appendChild(document.getElementById(data));
+        }
+    &lt;/script&gt;
+
+    &lt;div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"
+        style="float:left; width:198px; height:66px; margin:10px; padding:0px; border:1px solid #aaaaaa;"&gt;
+        &lt;img style="margin:0; padding:10px;" id="drag1" src="res/eg_dragdrop_w3school.gif" draggable="true"
+        ondragstart="drag(event)" id="drag1"&gt;
+    &lt;/div&gt;
+
+    &lt;div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"
+        style="float:left; width:198px; height:66px; margin:10px; padding:0px; border:1px solid #aaaaaa;"&gt;&lt;/div&gt;
+        </pre>
+        <p style="clear: both;"></p>
+    </div>
+    <pre>
+        首先：为了把一个元素设置为可拖放，请把 draggable 属性设置为 true：
+        然后，规定当元素被拖动时发生的事情。
+            在上面的例子中，ondragstart 属性调用了一个 drag(event) 函数，规定拖动什么数据。
+            dataTransfer.setData() 方法设置被拖动数据的数据类型和值：
+            function drag(ev) {
+                ev.dataTransfer.setData("text", ev.target.id);
+            }
+        拖到何处 - ondragover
+            ondragover 事件规定被拖动的数据能够被放置到何处。
+            默认地，数据/元素无法被放置到其他元素中。为了实现拖放，我们必须阻止元素的这种默认的处理方式。
+            这个任务由 ondragover 事件的 event.preventDefault() 方法完成：
+                event.preventDefault()
+        进行放置 - ondrop
+            当放开被拖数据时，会发生 drop 事件。
+
+        代码解释：
+            调用 preventDefault() 来阻止数据的浏览器默认处理方式（drop 事件的默认行为是以链接形式打开）
+            通过 dataTransfer.getData() 方法获得被拖的数据。该方法将返回在 setData() 方法中设置为相同类型的任何数据
+            被拖数据是被拖元素的 id ("drag1")
+            把被拖元素追加到放置元素中
+    </pre>
+
+    <h3>HTML 本地存储</h3>
+    <pre>
+        HTML 本地存储：优于 cookies。
+        通过本地存储（Local Storage），web 应用程序能够在用户浏览器中对数据进行本地的存储。
+        在 HTML5 之前，应用程序数据只能存储在 cookie 中，包括每个服务器请求。本地存储则更安全，并且可在不影响网站性能的前提下将大量数据存储于本地。
+        本地存储经由起源地（origin）（经由域和协议）。所有页面，从起源地，能够存储和访问相同的数据。
+
+        HTML 本地存储提供了两个在客户端存储数据的对象：
+            window.localStorage - 存储没有截止日期的数据。当浏览器被关闭时数据不会被删除，在下一天、周或年中，都是可用的。
+            window.sessionStorage - 针对一个 session 来存储数据（当关闭浏览器标签页时数据会丢失）
+        在使用本地存储时，请检测 localStorage 和 sessionStorage 的浏览器支持：
+            if (typeof(Storage) !== "undefined") {
+                // 存储
+                localStorage.setItem("lastname", "Gates");
+                // 取回
+                document.getElementById("result").innerHTML = localStorage.getItem("lastname");
+                // 删除
+                localStorage.removeItem("lastname");
+
+                // 也可这样写：存储
+                localStorage.lastname = "Gates";
+                // 取回
+                document.getElementById("result").innerHTML = localStorage.lastname;
+            } else {
+                // 抱歉！不支持 Web Storage ..
+            }
+        <span class="note">名称/值对始终存储为字符串。如果需要请记得把它们转换为其他格式！</span>
+    </pre>
+
+    <h3>HTML5 应用程序缓存</h3>
+    <pre>
+        HTML5 引入了应用程序缓存（Application Cache），这意味着可对 web 应用进行缓存，并可在没有因特网连接时进行访问。
+        应用程序缓存为应用带来三个优势：
+            1.离线浏览 - 用户可在应用离线时使用它们
+            2.速度 - 已缓存资源加载得更快
+            3.减少服务器负载 - 浏览器将只从服务器下载更新过或更改过的资源
+
+        如需启用应用程序缓存，请在文档的 &lt;html&gt; 标签中包含 manifest 属性：
+            &lt;html manifest="demo.appcache"&gt;&lt;/html&gt;
+            每个指定了 manifest 的页面在用户对其访问时都会被缓存。如果未指定 manifest 属性，则页面不会被缓存（除非在 manifest 文件中直接指定了该页面）。
+            manifest 文件的建议文件扩展名是：".appcache"。
+            <span class="notice">注意：</span>manifest 文件需要设置正确的 MIME-type，即 "text/cache-manifest"。必须在 web 服务器上进行配置。
+
+        <span class="note">Manifest 文件</span>
+        manifest 文件是简单的文本文件，它告知浏览器被缓存的内容（以及不缓存的内容）。
+        manifest 文件有三个部分：
+            CACHE MANIFEST - 在此标题下列出的文件将在首次下载后进行缓存
+            NETWORK - 在此标题下列出的文件需要与服务器的连接，且不会被缓存
+            FALLBACK - 在此标题下列出的文件规定当页面无法访问时的回退页面（比如 404 页面）
+
+        实例 - 完整的 Cache Manifest 文件
+            CACHE MANIFEST
+            # 2012-02-21 v1.0.0
+            /theme.css
+            /logo.gif
+            /main.js
+
+            #可以使用星号来指示所有其他其他资源/文件都需要因特网连接：
+            NETWORK:
+            *
+
+            FALLBACK:
+            /html/ /offline.html
+
+        <span class="note">更新缓存</span>
+        一旦应用被缓存，它就会保持缓存直到发生下列情况：
+            用户清空浏览器缓存
+            manifest 文件被修改（参阅下面的提示）
+            由程序来更新应用缓存
+            <span class="notice">提示：</span>以 "#" 开头的是注释行，但也可满足其他用途。应用的缓存只会在其 manifest 文件改变时被更新。
+                更新注释行中的日期和版本号是一种使浏览器重新缓存文件的办法。
+    </pre>
+
+    <h3>HTML Web Workers</h3>
+    <pre>
+        Web worker 是运行在后台的 JavaScript，不会影响页面的性能。
+        JavaScript 语言采用的是单线程模型，也就是说，所有任务只能在一个线程上完成，一次只能做一件事。前面的任务没做完，后面的任务只能等着。
+        当在 HTML 页面中执行脚本时，页面是不可响应的，直到脚本已完成。
+        Web worker 是运行在后台的 JavaScript，独立于其他脚本，不会影响页面的性能。您可以继续做任何愿意做的事情：点击、选取内容等等，而此时 web worker 运行在后台。
+
+        实例
+        &lt;!DOCTYPE html&gt;
+        &lt;html&gt;
+        &lt;body&gt;
+            &lt;p&gt;Count numbers: &lt;output id=&quot;result&quot;&gt;&lt;/output&gt;&lt;/p&gt;
+            &lt;button onclick=&quot;startWorker()&quot;&gt;Start Worker&lt;/button&gt; 
+            &lt;button onclick=&quot;stopWorker()&quot;&gt;Stop Worker&lt;/button&gt;
+            &lt;br&gt;&lt;br&gt;
+
+            &lt;script&gt;
+                var w;
+                function startWorker() {
+                    if(typeof(Worker) !== &quot;undefined&quot;) {
+                        if(typeof(w) == &quot;undefined&quot;) {
+                            w = new Worker(&quot;demo_workers.js&quot;);
+                        }
+                        w.onmessage = function(event) {
+                            document.getElementById(&quot;result&quot;).innerHTML = event.data;
+                        };
+                    } else {
+                        document.getElementById(&quot;result&quot;).innerHTML = &quot;Sorry! No Web Worker support.&quot;;
+                    }
+                }
+
+                function stopWorker() { 
+                    w.terminate();
+                    w = undefined;
+                }
+            &lt;/script&gt;
+
+        &lt;/body&gt;
+        &lt;/html&gt;
     </pre>
 
 
@@ -758,10 +1383,11 @@
 
 
 
-
-
-
     <br /><br /><br /><br /><br /><br /><br /><br />
+    
+
+
+
     <a href="#top" target="_self">回顶部</a>
 </body>
 
