@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" type="text/css" href="res/common.css" />
+    <base target="_blank" />
 
     <title>CSS 教程</title>
 </head>
@@ -328,8 +329,570 @@
         }
     </pre>
 
+    <h3>CSS 边框</h3>
+    <h5>CSS 边框样式 <span class="tag">border-style</span></h5>
+    <style>
+        p.dotted {
+            border-style: dotted;
+        }
+
+        p.dashed {
+            border-style: dashed;
+        }
+
+        p.solid {
+            border-style: solid;
+        }
+
+        p.double {
+            border-style: double;
+        }
+
+        p.groove {
+            border-style: groove;
+        }
+
+        p.ridge {
+            border-style: ridge;
+        }
+
+        p.inset {
+            border-style: inset;
+        }
+
+        p.outset {
+            border-style: outset;
+        }
+
+        p.none {
+            border-style: none;
+        }
+
+        p.hidden {
+            border-style: hidden;
+        }
+
+        p.mix {
+            border-style: dotted dashed solid double;
+        }
+    </style>
+    <p style="border: 3px dotted; padding:2px 4px;">点状边框。border-style: dotted;</p>
+    <p style="border: 3px dashed; padding:2px 4px;">虚线边框。border-style: dashed;</p>
+    <p style="border: 3px solid; border-style: solid; padding:2px 4px;">实线边框。border-style: solid;</p>
+    <p style="border: 3px double; border-style: double; padding:2px 4px;">双线边框。border-style: double;</p>
+    <p style="border: 3px groove; border-style: groove; padding:2px 4px;">凹槽边框。其效果取决于 border-color 的值。border-style:
+        groove;</p>
+    <p style="border: 3px ridge; border-style: ridge; padding:2px 4px;">垄状边框。其效果取决于 border-color 的值。border-style: ridge;
+    </p>
+    <p style="border: 3px inset; border-style: inset; padding:2px 4px;">3D inset 边框。其效果取决于 border-color 的值。border-style:
+        inset;</p>
+    <p style="border: 3px outset; border-style: outset; padding:2px 4px;">3D outset 边框。其效果取决于 border-color
+        的值。border-style: outset;</p>
+    <p style="border: 3px none; border-style: none; padding:2px 4px;">无边框。border-style: none;</p>
+    <p style="border: 3px hidden; border-style: hidden; padding:2px 4px;">隐藏边框。border-style: hidden;</p>
+    <p style="border: 3px; border-style: dotted dashed solid double; padding:2px 4px;">混合边框。border-style: dotted dashed
+        solid double; (上右下左顺序)</p>
+    <p class="important"><span class="notice">注意：</span>除非设置了 <span class="code_marked">border-style</span> 属性，否则其他 CSS
+        边框属性（将在下一章中详细讲解）都不会有任何作用！</p>
+    <pre>
+        也可以单独设置四个边框样式
+        p {
+            border-top-style: dotted;
+            border-right-style: solid;
+            border-bottom-style: dotted;
+            border-left-style: solid;
+          }
+        
+        还可以合在一起写
+        p {  border-style: dotted solid; }
+        如果 border-style 属性设置四个值：上右下左
+        如果 border-style 属性设置三个值：上 右左 下
+        如果 border-style 属性设置两个值：上下 右左
+        如果 border-style 属性设置一个值：四个边框一样
+    </pre>
 
 
+    <h5>CSS 边框宽度 <span class="tag">border-width</span></h5>
+    <pre>
+        border-width 属性指定四个边框的宽度
+        以将宽度设置为特定大小（以 px、pt、cm、em 计），也可以使用以下三个预定义值之一：thin、medium 或 thick
+        border-width: 25px 10px 4px 35px; /* 上边框 25px，右边框 10px，下边框 4px，左边框 35px */
+    </pre>
+
+    <h5>CSS 边框颜色 <span class="tag">border-color</span></h5>
+    <pre>
+        如果未设置 border-color，则它将继承元素的颜色。
+        border-color 属性可以设置一到四个值（用于上边框、右边框、下边框和左边框）
+        border-color: red green blue yellow; /* 上红、右绿、下蓝、左黄 */
+    </pre>
+
+    <h5>CSS 圆角边框 <span class="tag">border-radius</span></h5>
+    <pre>
+        border-radius: 5px;
+    </pre>
+
+    <h5>CSS 简写边框属性 <span class="tag">border</span></h5>
+    <pre>
+        border 属性是以下各个边框属性的简写属性：
+            border-width
+            border-style（必需）
+            border-color
+    </pre>
+
+    <table class="dataintable">
+        <caption>所有 CSS 边框属性</caption>
+        <tr>
+            <th>属性</th>
+            <th>描述</th>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_border.asp" title="CSS border 属性">border</a></td>
+            <td>简写属性，在一条声明中设置所有边框属性。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_border-color.asp"
+                    title="CSS border-color 属性">border-color</a></td>
+            <td>简写属性，设置四条边框的颜色。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_border-radius.asp"
+                    title="CSS border-radius 属性">border-radius</a></td>
+            <td>简写属性，可设置圆角的所有四个 border-*-radius 属性。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_border-style.asp"
+                    title="CSS border-style 属性">border-style</a></td>
+            <td>简写属性，设置四条边框的样式。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_border-width.asp"
+                    title="CSS border-width 属性">border-width</a></td>
+            <td>简写属性，设置四条边框的宽度。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_border-bottom.asp"
+                    title="CSS border-bottom 属性">border-bottom</a></td>
+            <td>简写属性，在一条声明中设置所有下边框属性。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_border-bottom-color.asp"
+                    title="CSS border-bottom-color 属性">border-bottom-color</a>
+            </td>
+            <td>设置下边框的颜色。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_border-bottom-style.asp"
+                    title="CSS border-bottom-style 属性">border-bottom-style</a>
+            </td>
+            <td>设置下边框的样式。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_border-bottom-width.asp"
+                    title="CSS border-bottom-width 属性">border-bottom-width</a>
+            </td>
+            <td>设置下边框的宽度。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_border-left.asp"
+                    title="CSS border-left 属性">border-left</a></td>
+            <td>简写属性，在一条声明中设置所有左边框属性。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_border-left-color.asp"
+                    title="CSS border-left-color 属性">border-left-color</a></td>
+            <td>设置左边框的颜色。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_border-left-style.asp"
+                    title="CSS border-left-style 属性">border-left-style</a></td>
+            <td>设置左边框的样式。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_border-left-width.asp"
+                    title="CSS border-left-width 属性">border-left-width</a></td>
+            <td>设置左边框的宽度。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_border-right.asp"
+                    title="CSS border-right 属性">border-right</a></td>
+            <td>简写属性，在一条声明中设置所有右边框属性。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_border-right-color.asp"
+                    title="CSS border-right-color 属性">border-right-color</a>
+            </td>
+            <td>设置右边框的颜色。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_border-right-style.asp"
+                    title="CSS border-right-style 属性">border-right-style</a>
+            </td>
+            <td>设置右边框的样式。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_border-right-width.asp"
+                    title="CSS border-right-width 属性">border-right-width</a>
+            </td>
+            <td>设置右边框的宽度。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_border-top.asp" title="CSS border-top 属性">border-top</a>
+            </td>
+            <td>简写属性，在一条声明中设置所有上边框属性。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_border-top-color.asp"
+                    title="CSS border-top-color 属性">border-top-color</a></td>
+            <td>设置上边框的颜色。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_border-top-style.asp"
+                    title="CSS border-top-style 属性">border-top-style</a></td>
+            <td>设置上边框的样式。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_border-top-width.asp"
+                    title="CSS border-top-width 属性">border-top-width</a></td>
+            <td>设置上边框的宽度。</td>
+        </tr>
+    </table>
+
+    <h3>CSS 外边距 <span class="tag">margin</span></h3>
+    <pre>
+        可以使用的值:
+            auto - 浏览器来计算外边距
+            length - 以 px、pt、cm 等单位指定外边距
+            % - 指定以包含元素宽度的百分比计的外边距
+            inherit - 指定应从父元素继承外边距
+        如果 margin 属性设置四个值：上右下左
+        如果 margin 属性设置三个值：上 右左 下
+        如果 margin 属性设置两个值：上下 右左
+        如果 margin 属性设置一个值：四个边框一样
+        <span class="notice">提示：允许负值</span>
+
+        也可以分开设置
+            margin-top
+            margin-right
+            margin-bottom
+            margin-left
+
+        CSS 外边距合并
+            外边距合并指的是，当两个垂直外边距相遇时，它们将形成一个外边距。
+            合并后的外边距的高度等于两个发生合并的外边距的高度中的较大者。
+            <a href="https://www.w3school.com.cn/css/css_margin_collapse.asp">w3school</a>
+    </pre>
+
+    <h3>CSS 内边距 <span class="tag">padding</span></h3>
+    <pre>
+        可以使用的值:
+            length - 以 px、pt、cm 等单位指定外边距
+            % - 指定以包含元素宽度的百分比计的外边距
+            inherit - 指定应从父元素继承外边距
+        如果 padding 属性设置四个值：上右下左
+        如果 padding 属性设置三个值：上 右左 下
+        如果 padding 属性设置两个值：上下 右左
+        如果 padding 属性设置一个值：四个边框一样
+        <span class="notice">提示：不允许负值</span>
+
+        也可以分开设置
+            padding-top
+            padding-right
+            padding-bottom
+            padding-left
+    </pre>
+
+    <h3>CSS 高度和宽度 <span class="tag">width/height</span></h3>
+    <pre>
+        height 和 width 属性不包括内边距、边框或外边距。它设置的是元素内边距、边框以及外边距内的区域的高度或宽度。
+        height 和 width 属性可设置如下值：
+            auto - 默认。浏览器计算高度和宽度。
+            length - 以 px、cm 等定义高度/宽度。
+            % - 以包含块的百分比定义高度/宽度。
+            initial - 将高度/宽度设置为默认值。
+            inherit - 从其父值继承高度/宽度。
+
+        min-width/max-width 属性用于设置元素的最小/大宽度。
+    </pre>
+
+    <h3>CSS 框(盒)模型</h3>
+    <pre>
+        所有 HTML 元素都可以视为方框。在 CSS 中，在谈论设计和布局时，会使用术语“盒模型”或“框模型”。
+        <img src="res/boxmodel.gif"/>
+    </pre>
+
+    <h3>CSS 轮廓 <span class="tag">outline</span></h3>
+    <pre>
+        轮廓是在元素周围绘制的一条线，在边框之外，以凸显元素。
+        轮廓与边框不同！不同之处在于：轮廓是在元素边框之外绘制的，并且可能与其他内容重叠。同样，轮廓也不是元素尺寸的一部分；元素的总宽度和高度不受轮廓线宽度的影响。
+        CSS 拥有如下轮廓属性：
+            outline-style
+            outline-color
+            outline-width
+            outline-offset
+            outline 轮廓简写 ,组成:
+                outline-width
+                outline-style（必需）
+                outline-color
+    </pre>
+
+    <h3>CSS 文本</h3>
+    <table class="dataintable">
+        <caption>所有 CSS 文本属性</caption>
+        <tr>
+            <th style="width: 22%;">属性</th>
+            <th>描述</th>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_text_color.asp" title="CSS color 属性">color</a></td>
+            <td>设置文本颜色。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_text_direction.asp"
+                    title="CSS direction 属性">direction</a></td>
+            <td>指定文本的方向 / 书写方向。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_text_letter-spacing.asp"
+                    title="CSS letter-spacing 属性">letter-spacing</a></td>
+            <td>设置字符间距。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cnhttps://www.w3school.com.cn/cssref/pr_dim_line-height.asp"
+                    title="CSS line-height 属性">line-height</a></td>
+            <td>设置行高。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_text_text-align.asp"
+                    title="CSS text-align 属性">text-align</a></td>
+            <td>指定文本的水平对齐方式。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_text_text-decoration.asp"
+                    title="CSS text-decoration 属性">text-decoration</a></td>
+            <td>
+                指定添加到文本的装饰效果。
+                <ul>
+                    <li>text-decoration: overline; 上划线</li>
+                    <li>text-decoration: underline; 下划线</li>
+                    <li>text-decoration: line-through; 删除线</li>
+                    <li>text-decoration: none; 通常用于从链接上删除下划线：a { text-decoration: none; }</li>
+                </ul>
+            </td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_text_text-indent.asp"
+                    title="CSS text-indent 属性">text-indent</a></td>
+            <td>指定文本块中首行的缩进。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_text-shadow.asp"
+                    title="CSS text-shadow 属性">text-shadow</a></td>
+            <td>指定添加到文本的阴影效果。text-shadow: 2px 2px 5px red; 水平垂直阴影2px 阴影模糊效果5px 阴影颜色 red</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_text_text-transform.asp"
+                    title="CSS text-transform 属性">text-transform</a></td>
+            <td>控制文本的大小写。全部大写|全部小写|单词首字母大写(uppercase|lowercase|capitalize)</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_text-overflow.asp"
+                    title="CSS text-overflow 属性">text-overflow</a></td>
+            <td>指定应如何向用户示意未显示的溢出内容。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_unicode-bidi.asp"
+                    title="CSS unicode-bidi 属性">unicode-bidi</a></td>
+            <td>与 direction 属性一起使用，设置或返回是否应重写文本来支持同一文档中的多种语言。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_pos_vertical-align.asp"
+                    title="CSS vertical-align 属性">vertical-align</a></td>
+            <td>指定文本的垂直对齐方式。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_text_white-space.asp"
+                    title="CSS white-space 属性">white-space</a></td>
+            <td>指定如何处理元素内的空白。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_text_word-spacing.asp"
+                    title="CSS word-spacing 属性">word-spacing</a></td>
+            <td>设置单词间距。</td>
+        </tr>
+    </table>
+
+    <h3>CSS 字体</h3>
+    <pre>
+        在 CSS 中，有五个通用字体族：
+            衬线字体（Serif）- 在每个字母的边缘都有一个小的笔触。它们营造出一种形式感和优雅感。
+            无衬线字体（Sans-serif）- 字体线条简洁（没有小笔画）。它们营造出现代而简约的外观。
+            等宽字体（Monospace）- 这里所有字母都有相同的固定宽度。它们创造出机械式的外观。
+            草书字体（Cursive）- 模仿了人类的笔迹。
+            幻想字体（Fantasy）- 是装饰性/俏皮的字体。
+            所有不同的字体名称都属于这五个通用字体系列之一。
+        <img src="res/serif.gif" />
+
+        <span class="tag">font-family</span> 规定文本的字体
+            font-family 属性应包含多个字体名称作为“后备”系统，以确保浏览器/操作系统之间的最大兼容性。请以您需要的字体开始，
+            并以通用系列结束（如果没有其他可用字体，则让浏览器选择通用系列中的相似字体）。字体名称应以逗号分隔。
+            <span class="notice">注释：</span>如果字体名称不止一个单词，则必须用引号引起来，例如："Times New Roman"
+            font-family: "Times New Roman", Times, serif;
+        <span class="tag">font-style</span> 主要用于指定斜体文本
+            此属性可设置三个值：
+                normal - 文字正常显示
+                italic - 文本以斜体显示
+                oblique - 文本为“倾斜”（倾斜与斜体非常相似，但支持较少）
+        <span class="tag">font-weight</span> 指定字体的粗细 normal|bold
+        <span class="tag">font-size</span> 设置文本的大小
+            font-size 值可以是绝对或相对大小。
+                绝对尺寸：
+                    将文本设置为指定大小
+                    不允许用户在所有浏览器中更改文本大小（可访问性不佳）
+                    当输出的物理尺寸已知时，绝对尺寸很有用
+
+                相对尺寸：
+                    设置相对于周围元素的大小
+                    允许用户在浏览器中更改文本大小
+            <span class="note">注释：</span>如果您没有指定字体大小，则普通文本（如段落）的默认大小为 16px（16px = 1em）。
+            W3C 建议使用 em 尺寸单位
+            1em 等于当前字体大小。浏览器中的默认文本大小为 16px。因此，默认大小 1em 为 16px。
+            可以使用这个公式从像素到 em 来计算大小：pixels/16=em。
+
+            响应式字体大小
+                可以使用 vw 单位设置文本大小，它的意思是“视口宽度”（"viewport width"）。
+                这样，文本大小将遵循浏览器窗口的大小，请调整浏览器窗口的大小，以查看字体大小如何缩放：
+                视口（Viewport）是浏览器窗口的大小。 1vw = 视口宽度的 1％。如果视口为 50 厘米宽，则 1vw 为 0.5 厘米。
+    </pre>
+    <table class="dataintable">
+        <caption>所有 CSS 字体属性</caption>
+        <tr>
+            <th>属性</th>
+            <th>描述</th>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_font_font.asp" title="CSS font 属性">font</a></td>
+            <td>简写属性。在一条声明中设置所有字体属性。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_font_font-family.asp"
+                    title="CSS font-family 属性">font-family</a></td>
+            <td>规定文本的字体系列（字体族）。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_font_font-size.asp"
+                    title="CSS font-size 属性">font-size</a></td>
+            <td>规定文本的字体大小。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_font_font-style.asp"
+                    title="CSS font-style 属性">font-style</a></td>
+            <td>规定文本的字体样式。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_font_font-variant.asp"
+                    title="CSS font-variant 属性">font-variant</a></td>
+            <td>规定是否以小型大写字母的字体显示文本。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_font-weight.asp"
+                    title="CSS font-weight 属性">font-weight</a></td>
+            <td>规定字体的粗细。</td>
+        </tr>
+    </table>
+
+    <h3>CSS 表格</h3>
+    <table class="dataintable">
+        <caption>CSS 表格属性</caption>
+        <tr>
+            <th>属性</th>
+            <th>描述</th>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_border.asp" title="CSS border 属性">border</a></td>
+            <td>简写属性。在一条声明中设置所有边框属性。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_border-collapse.asp" title="CSS border-collapse 属性">border-collapse</a></td>
+            <td>
+                设置是否将表格边框折叠为单一边框
+                <br />
+                表格拥有双边框。这是因为 table 和 &lt;th&gt; 和 &lt;td&gt; 元素都有单独的边框。
+            </td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_border-spacing.asp" title="CSS border-spacing 属性">border-spacing</a></td>
+            <td>规定相邻单元格之间的边框的距离。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_tab_caption-side.asp" title="CSS caption-side 属性">caption-side</a></td>
+            <td>规定表格标题的位置。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_tab_empty-cells.asp" title="CSS empty-cells 属性">empty-cells</a></td>
+            <td>规定是否在表格中的空白单元格上显示边框和背景。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_tab_table-layout.asp" title="CSS table-layout 属性">table-layout</a></td>
+            <td>设置用于表格的布局算法。</td>
+        </tr>
+    </table>
+    <pre>
+        <span class="note">可悬停表格</span>
+            在 &lt;tr&gt; 元素上使用 :hover 选择器，以突出显示鼠标悬停时的表格行：
+            tr:hover {background-color: #f5f5f5;}
+
+        <span class="note">条状表格(相邻行颜色不一样)</span>
+            为了实现斑马纹表格效果，请使用 nth-child() 选择器，并为所有偶数（或奇数）表行添加 background-color：
+            tr:nth-child(even) {background-color: #f2f2f2;}
+            odd: 奇数  even: 偶数
+    </pre>
 
 
 
@@ -343,19 +906,18 @@
 
     <style>
         #test {
-            padding: 100px;
-            background-color: rgba(255, 0, 0, 0.5);
-            background-image: url("res/git_overview.png");
-            background-repeat: no-repeat;
-            background-attachment: scroll;
-            background-origin: border-box;
+            border: 2px solid #ff0000;
+        }
 
-            width: 800px;
-            height: 500px;
-            border: 2px solid rebeccapurple;
+        #content {
+            border: 2px solid #0000ff;
+            margin-left: 50%;
+            text-decoration: ;
         }
     </style>
-    <div id="test">dfdfef</div>
+    <div id="test">
+        <div id="content">dfdfdf</div>
+    </div>
     <a href="#top" target="_self">回顶部</a>
 </body>
 
