@@ -855,7 +855,8 @@
         </tr>
 
         <tr>
-            <td><a href="https://www.w3school.com.cn/cssref/pr_border-collapse.asp" title="CSS border-collapse 属性">border-collapse</a></td>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_border-collapse.asp"
+                    title="CSS border-collapse 属性">border-collapse</a></td>
             <td>
                 设置是否将表格边框折叠为单一边框
                 <br />
@@ -864,22 +865,26 @@
         </tr>
 
         <tr>
-            <td><a href="https://www.w3school.com.cn/cssref/pr_border-spacing.asp" title="CSS border-spacing 属性">border-spacing</a></td>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_border-spacing.asp"
+                    title="CSS border-spacing 属性">border-spacing</a></td>
             <td>规定相邻单元格之间的边框的距离。</td>
         </tr>
 
         <tr>
-            <td><a href="https://www.w3school.com.cn/cssref/pr_tab_caption-side.asp" title="CSS caption-side 属性">caption-side</a></td>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_tab_caption-side.asp"
+                    title="CSS caption-side 属性">caption-side</a></td>
             <td>规定表格标题的位置。</td>
         </tr>
 
         <tr>
-            <td><a href="https://www.w3school.com.cn/cssref/pr_tab_empty-cells.asp" title="CSS empty-cells 属性">empty-cells</a></td>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_tab_empty-cells.asp"
+                    title="CSS empty-cells 属性">empty-cells</a></td>
             <td>规定是否在表格中的空白单元格上显示边框和背景。</td>
         </tr>
 
         <tr>
-            <td><a href="https://www.w3school.com.cn/cssref/pr_tab_table-layout.asp" title="CSS table-layout 属性">table-layout</a></td>
+            <td><a href="https://www.w3school.com.cn/cssref/pr_tab_table-layout.asp"
+                    title="CSS table-layout 属性">table-layout</a></td>
             <td>设置用于表格的布局算法。</td>
         </tr>
     </table>
@@ -894,6 +899,552 @@
             odd: 奇数  even: 偶数
     </pre>
 
+    <h3>CSS 布局 - <span class="tag">display</span> 属性</h3>
+    <pre>
+        display 属性规定是否/如何显示元素
+        每个 HTML 元素都有一个默认的 display 值，具体取决于它的元素类型。大多数元素的默认 display 值为 <span class="tag">block</span> 或 <span class="tag">inline</span>
+        将行内元素更改为块元素，反之亦然，对于使页面以特定方式显示同时仍遵循 Web 标准很有用。
+        一个常见的例子是为实现水平菜单而生成行内的 &lt;li&gt; 元素：
+        <span class="notice">注意：</span>设置元素的 display 属性仅会更改元素的显示方式，而不会更改元素的种类。因此，带有 display: block; 的行内元素不允许在其中包含其他块元素。
+        display: none; 隐藏元素,相当于 Android 中的 GONE
+
+        <span class="notice">visibility</span>
+    </pre>
+    <table class="dataintable">
+        <caption>visibility 可能的值</caption>
+        <tr>
+            <th>值</th>
+            <th>描述</th>
+        </tr>
+
+        <tr>
+            <td>visible</td>
+            <td>默认值。元素是可见的。</td>
+        </tr>
+
+        <tr>
+            <td>hidden</td>
+            <td>元素是不可见的。相当于 Android 中的 INVISIBLE</td>
+        </tr>
+
+        <tr>
+            <td>collapse</td>
+            <td>当在表格元素中使用时，此值可删除一行或一列，但是它不会影响表格的布局。被行或列占据的空间会留给其他内容使用。如果此值被用在其他的元素上，会呈现为 &quot;hidden&quot;。</td>
+        </tr>
+
+        <tr>
+            <td>inherit</td>
+            <td>规定应该从父元素继承 visibility 属性的值。</td>
+        </tr>
+    </table>
+
+    <h3>CSS 布局 - <span class="tag">position</span> 属性</h3>
+    <pre>
+        position 属性规定应用于元素的定位方法的类型。
+        有五个不同的位置值：static, relative, fixed, absolute, sticky
+        元素其实是使用 top、bottom、left 和 right 属性定位的。但是，除非首先设置了 position 属性，否则这些属性将不起作用。根据不同的 position 值，它们的工作方式也不同。
+    </pre>
+    <h5>position: static;</h5>
+    <pre>
+        HTML 元素默认情况下的定位方式为 static（静态）。
+        态定位的元素不受 top、bottom、left 和 right 属性的影响。始终根据页面的正常流进行定位：
+    </pre>
+    <h5>position: relative;</h5>
+    <pre>
+        相对于其正常位置进行定位。
+        设置相对定位的元素的 top、right、bottom 和 left 属性将导致其偏离其正常位置进行调整。不会对其余内容进行调整来适应元素留下的任何空间。
+    </pre>
+    <h5>position: fixed;</h5>
+    <pre>
+        相对于视口定位，这意味着即使滚动页面，它也始终位于同一位置。 top、right、bottom 和 left 属性用于定位此元素。
+        固定定位的元素不会在页面中通常应放置的位置上留出空隙。
+    </pre>
+    <h5>position: absolute;</h5>
+    <pre>
+        相对于最近的定位祖先元素进行定位（而不是相对于视口定位，如 fixed）。
+        如果绝对定位的元素没有祖先，它将使用文档主体（body），并随页面滚动一起移动。
+        <span class="notice">注意：</span>“被定位的”元素是其位置除 <span class="notice">static</span> 以外的任何元素。
+    </pre>
+    <h5>position: sticky;</h5>
+    <pre>
+        根据用户的滚动位置进行定位。
+        粘性元素根据滚动位置在相对（relative）和固定（fixed）之间切换。起先它会被相对定位，直到在视口中遇到给定的偏移位置为止 - 然后将其“粘贴”在适当的位置（比如 position:fixed）。
+        必须至少指定 top、right、bottom 或 left 之一，以便粘性定位起作用。
+        div.sticky {
+            position: -webkit-sticky; /* Safari */
+            position: sticky;
+            top: 0;
+            background-color: green;
+            border: 2px solid #4CAF50;
+        }
+    </pre>
+    <h5>重叠元素</h5>
+    <pre>
+        在对元素进行定位时，它们可以与其他元素重叠。
+        <span class="notice">z-index</span> 属性指定元素的堆栈顺序（哪个元素应放置在其他元素的前面或后面）。
+        元素可以设置正或负的堆叠顺序：
+        img {
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            z-index: -1;
+        }
+    </pre>
+
+    <h3>CSS 布局 - 溢出 <span class="notice">overflow</span></h3>
+    <pre>
+        overflow 属性指定在元素的内容太大而无法放入指定区域时是剪裁内容还是添加滚动条。
+        overflow 属性可设置以下值：
+            visible - 默认。溢出没有被剪裁。内容在元素框外渲染
+            hidden - 溢出被剪裁，其余内容将不可见
+            scroll - 溢出被剪裁，同时添加滚动条以查看其余内容
+            auto - 与 scroll 类似，但仅在必要时添加滚动条
+        <span class="note">注释：</span>overflow 属性仅适用于具有指定高度的块元素。
+
+        overflow-x 和 overflow-y 属性规定是仅水平还是垂直地（或同时）更改内容的溢出：
+            div {
+                overflow-x: hidden; /* 隐藏水平滚动栏 */
+                overflow-y: scroll; /* 添加垂直滚动栏 */
+            }
+    </pre>
+
+    <h3>CSS 布局 - 浮动和清除 <span class="notice">float clear </span></h3>
+    <pre>
+        float 属性规定元素如何浮动。
+        float 属性可以设置以下值之一：
+            left - 元素浮动到其容器的左侧
+            right - 元素浮动在其容器的右侧
+            none - 元素不会浮动（将显示在文本中刚出现的位置）。默认值。
+            inherit - 元素继承其父级的 float 值
+
+        clear 属性规定哪些元素可以在清除的元素旁边以及在哪一侧浮动。
+        clear 属性可设置以下值之一：
+            none - 允许两侧都有浮动元素。默认值
+            left - 左侧不允许浮动元素
+            right- 右侧不允许浮动元素
+            both - 左侧或右侧均不允许浮动元素
+            inherit - 元素继承其父级的 clear 值
+        使用 clear 属性的最常见用法是在元素上使用了 float 属性之后。
+        在清除浮动时，应该对清除与浮动进行匹配：如果某个元素浮动到左侧，则应清除左侧。您的浮动元素会继续浮动，但是被清除的元素将显示在其下方。
+
+        <span class="note">clearfix Hack</span>
+        如果一个元素比包含它的元素高，并且它是浮动的，它将“溢出”到其容器之外：
+        然后我们可以向包含元素添加 overflow: auto;，来解决此问题：
+            .clearfix {
+                overflow: auto;
+            }
+        但是，新的现代 clearfix hack 技术使用起来更安全，以下代码被应用于多数网站：
+            .clearfix::after {
+                content: "";
+                clear: both;
+                display: table;
+            }
+    </pre>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .box {
+            float: left;
+            width: 33.33%;
+            padding: 50px;
+        }
+
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+    </style>
+    <div>
+        <div class="clearfix" style="float: left;">
+            <div class="box" style="background-color:#bbb">
+                <p>框中的一些文本。</p>
+            </div>
+            <div class="box" style="background-color:#ccc">
+                <p>框中的一些文本。</p>
+            </div>
+            <div class="box" style="background-color:#ddd">
+                <p>框中的一些文本。</p>
+            </div>
+        </div>
+        <pre style="float: left;">
+            * {
+                box-sizing: border-box;
+            }
+    
+            .box {
+                float: left;
+                width: 33.33%;
+                padding: 50px;
+            }
+
+            .clearfix::after {
+                content: "";
+                clear: both;
+                display: table;
+            }
+        </pre>
+        <div style="clear: both;"></div>
+    </div>
+
+    <h3>CSS 布局 - <span class="tag">display: inline-block</span></h3>
+    <pre>
+        与 display: inline 相比，主要区别在于 display: inline-block 允许在元素上设置宽度和高度。并且将保留上下外边距/内边距，而 display: inline 则不会。
+        与 display: block 相比，主要区别在于 display：inline-block 在元素之后不添加换行符，因此该元素可以位于其他元素旁边。
+        <img src="res/display_attr.png" />
+    </pre>
+
+    <h3>CSS 布局 - 水平和垂直对齐</h3>
+    <pre>
+        居中对齐元素
+            要使块元素（例如 <div> ）水平居中，请使用 margin: auto;。
+            如果未设置 width 属性（或将其设置为 100％），则居中对齐无效。
+        居中对齐文本
+            如果仅需在元素内居中文本，请使用 text-align: center;
+        居中对齐图像
+            如需居中图像，请将左右外边距设置为 auto，并将其设置为块元素：
+            img {
+                display: block;
+                margin: auto;
+                width: 40%;
+            }
+        左和右对齐 - 使用 position
+            对齐元素的一种方法是使用 position: absolute; :
+            .right {
+                position: absolute;
+                right: 0px;
+                width: 300px;
+                border: 3px solid #73AD21;
+                padding: 20px;
+            }
+            <span class="notice">注意：</span>绝对定位的元素将从正常流中删除，并可能出现元素重叠。
+        左和右对齐 - 使用 float
+    </pre>
+
+    <h3>CSS 组合器</h3>
+    <pre>
+        组合器是解释选择器之间关系的某种机制。
+        CSS 中有四种不同的组合器：
+            后代选择器 (空格)
+            子选择器 (>)
+            相邻兄弟选择器 (+)
+            通用兄弟选择器 (~)
+    </pre>
+    <table class="dataintable">
+        <caption>所有 CSS 组合选择器</caption>
+        <tr>
+            <th>选择器</th>
+            <th>示例</th>
+            <th>示例描述</th>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/selector_element_element.asp"
+                    title="CSS element element 选择器"><i>element</i>
+                    <i>element</i></a></td>
+            <td>div p</td>
+            <td>选择 &lt;div&gt; 元素内的所有 &lt;p&gt; 元素。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/selector_element_gt.asp"
+                    title="CSS element&gt;element 选择器"><i>element</i>&gt;<i>element</i></a></td>
+            <td>div &gt; p</td>
+            <td>选择其父元素是 &lt;div&gt; 元素的所有 &lt;p&gt; 元素。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/selector_element_plus.asp"
+                    title="CSS element+element 选择器"><i>element</i>+<i>element</i></a></td>
+            <td>div + p</td>
+            <td>选择紧随 &lt;div&gt; 元素之后的 &lt;p&gt; 元素。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/selector_gen_sibling.asp"
+                    title="CSS element1~element2 选择器"><i>element1</i>~<i>element2</i></a></td>
+            <td>p ~ ul</td>
+            <td>选择前面有 &lt;p&gt; 元素的所有 &lt;ul&gt; 元素。</td>
+        </tr>
+    </table>
+
+    <h3>CSS 伪元素</h3>
+    <pre>
+        CSS 伪元素用于设置元素指定部分的样式。
+        伪元素的语法：
+            selector::pseudo-element {
+                property: value;
+            }
+    </pre>
+    <table class="dataintable">
+        <caption>所有 CSS 伪元素</caption>
+        <tr>
+            <th style="width: 20%;">选择器</th>
+            <th style="width: 22%;">例子</th>
+            <th>例子描述</th>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/selector_after.asp" title="">::after</a></td>
+            <td>p::after</td>
+            <td>在每个 &lt;p&gt; 元素之后插入内容。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/selector_before.asp" title="">::before</a></td>
+            <td>p::before</td>
+            <td>在每个 &lt;p&gt; 元素之前插入内容。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/selector_first-letter.asp" title="">::first-letter</a></td>
+            <td>p::first-letter</td>
+            <td>选择每个 &lt;p&gt; 元素的首字母。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/selector_first-line.asp" title="">::first-line</a></td>
+            <td>p::first-line</td>
+            <td>选择每个 &lt;p&gt; 元素的首行。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/selector_selection.asp" title="">::selection</a></td>
+            <td>p::selection</td>
+            <td>选择用户选择的元素部分。</td>
+        </tr>
+    </table>
+
+    <h3>CSS 伪类</h3>
+    <pre>
+        伪类用于定义元素的特殊状态。
+        伪类的语法：
+            selector:pseudo-class {
+                property: value;
+            }
+    </pre>
+    <table class="dataintable">
+        <caption>所有 CSS 伪类</caption>
+        <tr>
+            <th style="width: 20%;">选择器</th>
+            <th style="width: 22%;">例子</th>
+            <th>例子描述</th>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/selector_active.asp" title="CSS :active 选择器">:active</a>
+            </td>
+            <td>a:active</td>
+            <td>选择活动的链接。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/selector_checked.asp" title="CSS :checked 选择器">:checked</a>
+            </td>
+            <td>input:checked</td>
+            <td>选择每个被选中的 &lt;input&gt; 元素。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/selector_disabled.asp"
+                    title="CSS :disabled 选择器">:disabled</a></td>
+            <td>input:disabled</td>
+            <td>选择每个被禁用的 &lt;input&gt; 元素。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/selector_empty.asp" title="CSS :empty 选择器">:empty</a></td>
+            <td>p:empty</td>
+            <td>选择没有子元素的每个 &lt;p&gt; 元素。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/selector_enabled.asp" title="CSS :enabled 选择器">:enabled</a>
+            </td>
+            <td>input:enabled</td>
+            <td>选择每个已启用的 &lt;input&gt; 元素。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/selector_first-child.asp"
+                    title="CSS :first-child 选择器">:first-child</a></td>
+            <td>p:first-child</td>
+            <td>选择作为其父的首个子元素的每个 &lt;p&gt; 元素。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/selector_first-of-type.asp"
+                    title="CSS :first-of-type 选择器">:first-of-type</a></td>
+            <td>p:first-of-type</td>
+            <td>选择作为其父的首个 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/selector_focus.asp" title="CSS :focus 选择器">:focus</a></td>
+            <td>input:focus</td>
+            <td>选择获得焦点的 &lt;input&gt; 元素。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/selector_hover.asp" title="CSS :hover 选择器">:hover</a></td>
+            <td>a:hover</td>
+            <td>选择鼠标悬停其上的链接。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/selector_in-range.asp"
+                    title="CSS :in-range 选择器">:in-range</a></td>
+            <td>input:in-range</td>
+            <td>选择具有指定范围内的值的 &lt;input&gt; 元素。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/selector_invalid.asp" title="CSS :invalid 选择器">:invalid</a>
+            </td>
+            <td>input:invalid</td>
+            <td>选择所有具有无效值的 &lt;input&gt; 元素。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/selector_lang.asp"
+                    title="CSS :lang(language) 选择器">:lang(<i>language</i>)</a></td>
+            <td>p:lang(it)</td>
+            <td>选择每个 lang 属性值以 &quot;it&quot; 开头的 &lt;p&gt; 元素。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/selector_last-child.asp"
+                    title="CSS :last-child 选择器">:last-child</a></td>
+            <td>p:last-child</td>
+            <td>选择作为其父的最后一个子元素的每个 &lt;p&gt; 元素。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/selector_last-of-type.asp"
+                    title="CSS :last-of-type 选择器">:last-of-type</a></td>
+            <td>p:last-of-type</td>
+            <td>选择作为其父的最后一个 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/selector_link.asp" title="CSS :link 选择器">:link</a></td>
+            <td>a:link</td>
+            <td>选择所有未被访问的链接。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/selector_not.asp"
+                    title="CSS :not(selector) 选择器">:not(<i>selector</i>)</a></td>
+            <td>:not(p)</td>
+            <td>选择每个非 &lt;p&gt; 元素的元素。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/selector_nth-child.asp"
+                    title="CSS :nth-child(n) 选择器">:nth-child(<i>n</i>)</a></td>
+            <td>p:nth-child(2)</td>
+            <td>选择作为其父的第二个子元素的每个 &lt;p&gt; 元素。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/selector_nth-last-child.asp"
+                    title="CSS :nth-last-child(n) 选择器">:nth-last-child(<i>n</i>)</a></td>
+            <td>p:nth-last-child(2)</td>
+            <td>选择作为父的第二个子元素的每个&lt;p&gt;元素，从最后一个子元素计数。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/selector_nth-last-of-type.asp"
+                    title="CSS :nth-last-of-type(n) 选择器">:nth-last-of-type(<i>n</i>)</a></td>
+            <td>p:nth-last-of-type(2)</td>
+            <td>选择作为父的第二个&lt;p&gt;元素的每个&lt;p&gt;元素，从最后一个子元素计数</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/selector_nth-of-type.asp"
+                    title="CSS :nth-of-type(n) 选择器">:nth-of-type(<i>n</i>)</a>
+            </td>
+            <td>p:nth-of-type(2)</td>
+            <td>选择作为其父的第二个 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/selector_only-of-type.asp"
+                    title="CSS :only-of-type 选择器">:only-of-type</a></td>
+            <td>p:only-of-type</td>
+            <td>选择作为其父的唯一 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/selector_only-child.asp"
+                    title="CSS :only-child 选择器">:only-child</a></td>
+            <td>p:only-child</td>
+            <td>选择作为其父的唯一子元素的 &lt;p&gt; 元素。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/selector_optional.asp"
+                    title="CSS :optional 选择器">:optional</a></td>
+            <td>input:optional</td>
+            <td>选择不带 &quot;required&quot; 属性的 &lt;input&gt; 元素。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/selector_out-of-range.asp"
+                    title="CSS :out-of-range 选择器">:out-of-range</a></td>
+            <td>input:out-of-range</td>
+            <td>选择值在指定范围之外的 &lt;input&gt; 元素。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/selector_read-only.asp"
+                    title="CSS :read-only 选择器">:read-only</a></td>
+            <td>input:read-only</td>
+            <td>选择指定了 &quot;readonly&quot; 属性的 &lt;input&gt; 元素。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/selector_read-write.asp"
+                    title="CSS :read-write 选择器">:read-write</a></td>
+            <td>input:read-write</td>
+            <td>选择不带 &quot;readonly&quot; 属性的 &lt;input&gt; 元素。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/selector_required.asp"
+                    title="CSS :required 选择器">:required</a></td>
+            <td>input:required</td>
+            <td>选择指定了 &quot;required&quot; 属性的 &lt;input&gt; 元素。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/selector_root.asp" title="CSS :root 选择器">:root</a></td>
+            <td>root</td>
+            <td>选择元素的根元素。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/selector_target.asp" title="CSS :target 选择器">:target</a>
+            </td>
+            <td>#news:target</td>
+            <td>选择当前活动的 #news 元素（单击包含该锚名称的 URL）。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/selector_valid.asp" title="CSS :valid 选择器">:valid</a></td>
+            <td>input:valid</td>
+            <td>选择所有具有有效值的 &lt;input&gt; 元素。</td>
+        </tr>
+
+        <tr>
+            <td><a href="https://www.w3school.com.cn/cssref/selector_visited.asp" title="CSS :visited 选择器">:visited</a>
+            </td>
+            <td>a:visited</td>
+            <td>选择所有已访问的链接。</td>
+        </tr>
+    </table>
 
 
 
@@ -901,6 +1452,39 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 
     <br /><br /><br /><br /><br /><br /><br /><br />
 
@@ -912,6 +1496,8 @@
         #content {
             border: 2px solid #0000ff;
             margin-left: 50%;
+            position: relative;
+            left: 111;
         }
     </style>
     <div id="test">
