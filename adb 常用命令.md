@@ -7,4 +7,4 @@ apksigner verify -v --print-certs a.apk
 
 kill 进程
 adb shell am force-stop package-name
-adb shell am kill package-name
+adb shell am kill package-name  //杀死后台应用
