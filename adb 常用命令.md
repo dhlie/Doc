@@ -33,3 +33,6 @@
 
 ### crash 关键字搜索
     Fatal > Crash > AndroidRuntime > Exception>Error
+
+### logcat 过滤日志
+    adb logcat -v threadtime | grep " [VDIWEF] hpplay"
